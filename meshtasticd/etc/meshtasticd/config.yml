@@ -1,0 +1,11 @@
+Lora:
+  Module: sx1262 # Waveshare SX126X XXXM
+  DIO2_AS_RF_SWITCH: true
+  CS: 21
+  IRQ: 16
+  Busy: 20
+  Reset: 18
+
+Webserver:
+  Port: 8443 # Port for Webserver & Webservices
+  RootPath: /usr/share/doc/meshtasticd/web # Root Dir of WebServer

@@ -1,0 +1,11 @@
+FROM balenalib/%%BALENA_ARCH%%-debian-python:bookworm-3.10.10-build
+
+RUN apt update && apt install -y libgpiod-dev libyaml-cpp-dev libbluetooth-dev openssl libssl-dev libulfius-dev liborcania-dev wget curl git jq
+
+WORKDIR /config
+
+RUN wget -O meshtasticd.deb $(curl -s https://api.github.com/repos/meshtastic/firmware/releases/latest | jq -r '.assets[] | select(.name | endswith("_arm64.deb")) | .browser_download_url')
+
+RUN apt install -y ./meshtastic.deb
+
+COPY etc/ /etc/

@@ -1,0 +1,14 @@
+version: '2.4'
+volumes:
+  meshtasticd_prefs: {}
+services:
+  meshtasticd:
+    build: ./meshtasticd
+    network_mode: host
+    privileged_mode: true
+    labels:
+      io.balena.features.dbus: '1'
+      io.balena.features.supervisor-api: '1'
+      io.balena.features.balena-api: '1'
+    volumes:
+      - meshtasticd_prefs:/root/.portduino/default/prefs/
