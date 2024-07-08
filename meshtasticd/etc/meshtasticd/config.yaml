@@ -135,7 +135,7 @@ Input:
 ###
 
 Logging:
-  LogLevel: debug # debug, info, warn, error
+  LogLevel: info # debug, info, warn, error
 
 Webserver:
   Port: 8443 # Port for Webserver & Webservices
