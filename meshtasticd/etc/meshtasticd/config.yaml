@@ -135,10 +135,11 @@ Input:
 ###
 
 Logging:
-  LogLevel: info # debug, info, warn, error
+  LogLevel: debug # debug, info, warn, error
 
-# Webserver:
-#  Port: 8443 # Port for Webserver & Webservices
-#  RootPath: /usr/share/doc/meshtasticd/web # Root Dir of WebServer
+Webserver:
+  Port: 8443 # Port for Webserver & Webservices
+  RootPath: /usr/share/doc/meshtasticd/web # Root Dir of WebServer
 
 General:
+  MaxNodes: 200

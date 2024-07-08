@@ -4,11 +4,18 @@ RUN apt update && apt install -y libgpiod-dev libyaml-cpp-dev libbluetooth-dev o
 
 RUN pip install meshtastic
 
-WORKDIR /root
-
 RUN wget -O meshtasticd.deb $(curl -s https://api.github.com/repos/meshtastic/firmware/releases/latest | jq -r '.assets[] | select(.name | endswith("_arm64.deb")) | .browser_download_url')
 
 RUN apt install -y ./meshtasticd.deb && rm meshtasticd.deb
+
+## Not working at all :-(
+# RUN git clone https://github.com/frank-zago/ch341-i2c-spi-gpio.git && \
+# cd ch341-i2c-spi-gpio && \
+# make && \
+# insmod ch341-core.ko && \
+# insmod gpio-ch341.ko && \
+# insmod i2c-ch341.ko && \
+# insmod spi-ch341.ko
 
 COPY etc/ /etc/
 
