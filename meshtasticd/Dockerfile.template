@@ -8,14 +8,19 @@ RUN wget -O meshtasticd.deb $(curl -s https://api.github.com/repos/meshtastic/fi
 
 RUN apt install -y ./meshtasticd.deb && rm meshtasticd.deb
 
-## Not working at all :-(
-# RUN git clone https://github.com/frank-zago/ch341-i2c-spi-gpio.git && \
-# cd ch341-i2c-spi-gpio && \
-# make && \
-# insmod ch341-core.ko && \
-# insmod gpio-ch341.ko && \
-# insmod i2c-ch341.ko && \
-# insmod spi-ch341.ko
+SHELL ["/bin/bash", "-c"]
+
+RUN wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
+
+RUN source /root/.bashrc && nvm install --lts
+
+RUN source /root/.bashrc && \
+    git clone https://github.com/meshtastic/web.git /usr/share/doc/meshtasticd/web && \
+    cd /usr/share/doc/meshtasticd/web && \
+    pnpm i && \
+    pnpm build
 
 COPY etc/ /etc/
 
