@@ -16,7 +16,7 @@ assets:
       url: >-
         https://raw.githubusercontent.com/SamEureka/balena-meshtasticd/main/meshtastic-logo.png
 data:
-  defaultDeviceType: raspberrypi3-64
+  defaultDeviceType: raspberrypi0-2w-64
   supportedDeviceTypes:
     - raspberrypi0-2w-64
     - raspberrypi3-64
