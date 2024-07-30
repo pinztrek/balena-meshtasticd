@@ -1,4 +1,4 @@
-# <img src="assets/images/balena-icon.png" alt="balena.io logo" width="60" style="border-radius: 45%;"/> <img src="meshtastic-logo.png" alt="meshtastic logo" width="60" style="border-radius: 45%;" /> balena-meshtasticd
+# <kbd><img src="assets/images/balena-icon.png" alt="balena.io logo" width="60" style="border-radius:45%"/></kbd> <kbd><img src="meshtastic-logo.png" alt="meshtastic logo" width="60" style="border-radius:45%" /></kbd> balena-meshtasticd
 Meshtastic Linux Native Application with Charlie Unicorn magic on your PiZero W 2! 
 
 > [!CAUTION]
