@@ -26,4 +26,4 @@ data:
     - raspberrypi3-64
     - raspberrypi400-64
     - raspberrypi4-64
-version: 2.3.15
+version: 2.3.16
