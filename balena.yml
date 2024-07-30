@@ -4,7 +4,11 @@ type: sw.application
 description: >-
   Meshtastic Linux Native Application with Charlie Unicorn magic on your PiZero W 2!
 post-provisioning: >-
-  ### Using balena-meshtasticd... edit the (config.yaml)[https://github.com/SamEureka/balena-meshtasticd/blob/main/meshtasticd/etc/meshtasticd/config.yaml] file and push to your fleet.
+  ### Using balena-meshtasticd:
+  Edit the [config.yaml](https://github.com/SamEureka/balena-meshtasticd/blob/main/meshtasticd/etc/meshtasticd/config.yaml)file and push to your fleet.
+
+  ### Initial configuration:
+  See instructions [here](https://github.com/SamEureka/balena-meshtasticd/tree/main?tab=readme-ov-file#gear-initial-device-configuration)
 assets:
   repository: 
     type: blob.asset
@@ -22,4 +26,4 @@ data:
     - raspberrypi3-64
     - raspberrypi400-64
     - raspberrypi4-64
-version: 2.3.13
+version: 2.3.15
