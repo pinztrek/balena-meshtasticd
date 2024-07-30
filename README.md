@@ -1,7 +1,8 @@
 # <img src="assets/images/balena-icon.png" alt="balena.io logo" width="60" style="border-radius: 45%;"/> <img src="meshtastic-logo.png" alt="meshtastic logo" width="60" style="border-radius: 45%;" /> balena-meshtasticd
 Meshtastic Linux Native Application with Charlie Unicorn magic on your PiZero W 2! 
 
-> [!CAUTION] :rotating_light:
+> [!CAUTION]
+> # :rotating_light:
 > **Under no circumstances** should a LoRa radio be powered on without a properly connected antenna. Doing so poses a significant risk of irreparable damage to the radio module.
 >
 > A LoRa radio operates by transmitting and receiving radio waves through an antenna. When an antenna is not connected, the radio's transmitted energy has nowhere to dissipate. This causes a buildup of electrical energy within the radio module, which can lead to component failure, overheating, and permanent damage.
@@ -10,7 +11,7 @@ Meshtastic Linux Native Application with Charlie Unicorn magic on your PiZero W 
 
 [![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=<https://github.com/SamEureka/balena-meshtasticd>)
 
-## Hardware
+## :wrench: Hardware
 _balena-meshtastic_ has been tested with the following devices:
 
 ***LoRa:***
@@ -28,7 +29,8 @@ _balena-meshtastic_ has been tested with the following devices:
 > <img src="assets/images/balena-terminal-meshtastic.png" alt="balena terminal" width="650"/>
 
 ### :point_up: First things...
-The minimal setup required is to set the region and preset. _You can chain the flags and settings on one line. Eg,_ `meshtastic --set lora.region US --set lora.modem_preset LONG_FAST` 
+The minimal setup required is to set the region and preset. _You can chain the flags and settings on one line. exempli gratia,_ 
+`meshtastic --set lora.region US --set lora.modem_preset LONG_FAST` 
 
 |Setting|Usage|Description|
 |--|--|--|
@@ -37,5 +39,5 @@ The minimal setup required is to set the region and preset. _You can chain the f
 | --seturl | `meshtastic --seturl https://www.meshtastic.org/c/GAMiIE67C6zsNmlWQ-KE1tKt0fRKFciHka-DShI6G7ElvGOiKgZzaGFyZWQ=` | Set the channel URL, which contains LoRa configuration plus the configuration of channels. Replaces your current configuration and channels completely. |
 
 
-### _Enjoy!_  
+### :zap: _Enjoy!_  
 <img src="assets/images/pixel-sam.png" alt="sam image" width="40" /> //Sam
