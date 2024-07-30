@@ -6,9 +6,11 @@ Meshtastic Linux Native Application with Charlie Unicorn magic on your PiZero W 
 ## Initial Device Configuration
 > [!TIP]
 > The Meshtastic Python CLI is installed by default. You can access it via the Terminal in the BalenaCloud dashboard.
-> <img src="assets/images/balena-terminal-meshtastic.png" alt="balena terminal" width="150"/>
+>
+> <img src="assets/images/balena-terminal-meshtastic.png" alt="balena terminal" width="550"/>
 
-The first minimal setup, set the region and preset. You can chain the flags and settings on one line. Eg, `meshtastic --set lora.region US --set lora.modem_preset LONG_FAST` 
+### First things...
+The minimal setup required is to set the region and preset. _You can chain the flags and settings on one line. Eg,_ `meshtastic --set lora.region US --set lora.modem_preset LONG_FAST` 
 
 |Setting|Usage|Description|
 |--|--|--|
