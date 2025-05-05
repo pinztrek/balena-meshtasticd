@@ -4,9 +4,14 @@ RUN apt update && apt install -y libgpiod-dev libyaml-cpp-dev libbluetooth-dev o
 
 RUN pip install meshtastic
 
-RUN wget -O meshtasticd.deb $(curl -s https://api.github.com/repos/meshtastic/firmware/releases/latest | jq -r '.assets[] | select(.name | endswith("_arm64.deb")) | .browser_download_url')
+#RUN wget -O meshtasticd.deb $(curl -s https://api.github.com/repos/meshtastic/firmware/releases/latest | jq -r '.assets[] | select(.name | endswith("_arm64.deb")) | .browser_download_url')
 
-RUN apt install -y ./meshtasticd.deb && rm meshtasticd.deb
+#RUN apt install -y ./meshtasticd.deb && rm meshtasticd.deb
+
+RUN echo 'deb http://download.opensuse.org/repositories/network:/Meshtastic:/beta/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/network:Meshtastic:beta.list
+RUN curl -fsSL https://download.opensuse.org/repositories/network:Meshtastic:beta/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/network_Meshtastic_beta.gpg > /dev/null
+RUN apt update
+RUN apt install -y meshtasticd
 
 SHELL ["/bin/bash", "-c"]
 
