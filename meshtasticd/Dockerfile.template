@@ -13,6 +13,8 @@ RUN curl -fsSL https://download.opensuse.org/repositories/network:Meshtastic:bet
 RUN apt update
 RUN apt install -y meshtasticd
 
+RUN apt install -y vim-tiny nano
+
 SHELL ["/bin/bash", "-c"]
 
 RUN wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
