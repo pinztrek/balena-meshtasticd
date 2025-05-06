@@ -31,4 +31,4 @@ RUN source /root/.bashrc && \
 
 COPY etc/ /etc/
 
-CMD ["meshtasticd"]
+CMD ["/etc/meshtasticd/run_md.sh"]
