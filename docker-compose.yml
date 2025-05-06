@@ -1,4 +1,4 @@
-version: '2.13'
+version: '2.6'
 services:
   meshtasticd:
     build:
