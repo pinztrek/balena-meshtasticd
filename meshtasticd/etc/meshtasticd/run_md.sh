@@ -25,12 +25,12 @@ if [ ! -f config.yaml && -f config-dist.yaml ]; then
  if [ "MESHTOAD" ]; then
  	rm -f config.d/*
  	cp available.d/lora-usb-meshtoad-e22.yaml config.d
-  	cfg-device="meshtoad"
+  	cfg-device = "meshtoad"
   fi
   if [ "WAVESHARE" ]; then
    	rm -f config.d/*
  	cp available.d/lora-waveshare-sxxx.yaml config.d
-  	cfg-device="waveshare"
+  	cfg-device = "waveshare"
   fi
 
   if [ ! "$cfg-device" && "$LORA-DEVICE" ]; then
@@ -39,7 +39,7 @@ if [ ! -f config.yaml && -f config-dist.yaml ]; then
      		echo "Select $LORA-DEVICE"
        		rm -f config.d/*
  		cp available.d/"$LORA-DEVICE" config.d
-  		cfg-device="$LORA-DEVICE"
+  		cfg-device = "$LORA-DEVICE"
    	fi
     fi
        		
