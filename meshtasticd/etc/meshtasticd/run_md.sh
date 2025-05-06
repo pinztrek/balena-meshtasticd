@@ -14,5 +14,5 @@ ls -l /dev/spi
 
 # run the daemon
 meshtasticd
-echo "meshtasticd exited"
+echo "meshtasticd exited, sleeping $DELAY seconds"
 sleep $DELAY
