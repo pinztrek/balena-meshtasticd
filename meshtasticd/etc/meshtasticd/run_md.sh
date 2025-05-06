@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$LORA_DEBUG" ]; then
-	DELAY=180
+	LORA_DELAY=180
 fi
 
 if [ ! "$LORA_DELAY" ]; then
@@ -27,9 +27,9 @@ if [ ! -f config.yaml && -f config-dist.yaml ]; then
  if [ "$MESHTOAD" ]; then
  	rm -f config.d/*
  	cp available.d/lora-usb-meshtoad-e22.yaml config.d
-  	cfg-device = "meshtoad"
+  	cfg_device = "meshtoad"
   fi
-  if [ "$WAVESHARE" ]; then
+  if [ "$WAVESHARE" && ! "$cfg_device" ]; then
    	rm -f config.d/*
  	cp available.d/lora-waveshare-sxxx.yaml config.d
   	cfg_device = "waveshare"
