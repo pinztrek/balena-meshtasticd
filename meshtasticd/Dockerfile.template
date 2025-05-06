@@ -34,7 +34,7 @@ RUN echo "alias ll='ls -l'" >> /etc/bash*rc && \
 
 COPY etc/ /etc/
 
-RUN wget -P /etc/meshtasticd -o config-dist.yaml "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
+RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
 
 RUN chmod a+x /etc/meshtasticd/run_md.sh && \
     ls -l /etc/meshtasticd
