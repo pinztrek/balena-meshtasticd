@@ -11,9 +11,11 @@ services:
       io.balena.features.balena-api: '1'
     volumes:
       - meshtasticd_data:/root/.portduino/default/prefs
+      - meshtasticd_cfg:/etc/meshtasticd
       - meshtastic_web:/usr/share/doc/meshtasticd/web
     restart: unless-stopped
 
 volumes:
   meshtasticd_data:
+  meshtasticd_cfg:
   meshtastic_web:
