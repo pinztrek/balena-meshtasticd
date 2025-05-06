@@ -10,6 +10,13 @@ fi
 
 # install a default config.yaml if needed
 cd /etc/meshtasticd
+
+if [ "$LORA-RESET" ]; then
+	echo "Deleting Old Config"
+	rm -f config.d/*
+	rm -f config.yaml
+ fi
+
 if [ ! -f config.yaml && -f config-dist.yaml ]; then
 	echo "Setup default config.yaml"
 	cp config-dist.yaml config.yaml
