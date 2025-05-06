@@ -10,8 +10,9 @@ fi
 
 # install a default config.yaml if needed
 cd /etc/meshtasticd
+pwd
 
-if [ "$LORA-RESET" ]; then
+if [ "$LORA_RESET" ]; then
 	echo "Deleting Old Config"
 	rm -f config.d/*
 	rm -f config.yaml
@@ -22,24 +23,24 @@ if [ ! -f config.yaml && -f config-dist.yaml ]; then
 	cp config-dist.yaml config.yaml
  fi
 
- if [ "MESHTOAD" ]; then
+ if [ "$MESHTOAD" ]; then
  	rm -f config.d/*
  	cp available.d/lora-usb-meshtoad-e22.yaml config.d
   	cfg-device = "meshtoad"
   fi
-  if [ "WAVESHARE" ]; then
+  if [ "$WAVESHARE" ]; then
    	rm -f config.d/*
  	cp available.d/lora-waveshare-sxxx.yaml config.d
-  	cfg-device = "waveshare"
+  	cfg_device = "waveshare"
   fi
 
-  if [ ! "$cfg-device" && "$LORA-DEVICE" ]; then
-  	echo "See if $LORA-DEVICE exists
-    	if [ -f available.d/"$LORA-DEVICE" ]; then
-     		echo "Select $LORA-DEVICE"
+  if [ ! "$cfg_device" && "$LORA_DEVICE" ]; then
+  	echo "See if $LORA_DEVICE exists
+    	if [ -f available.d/"$LORA_DEVICE" ]; then
+     		echo "Select $LORA_DEVICE"
        		rm -f config.d/*
- 		cp available.d/"$LORA-DEVICE" config.d
-  		cfg-device = "$LORA-DEVICE"
+ 		cp available.d/"$LORA_DEVICE" config.d
+  		cfg_device = "$LORA_DEVICE"
    	fi
     fi
        		
