@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ "$DEBUG" ];then
+if [ "$DEBUG" ]; then
 	DELAY=120
 fi
 
-if [ ! "$DELAY" ];then
+if [ ! "$DELAY" ]; then
 	DELAY=5
 fi
 
@@ -16,20 +16,21 @@ if [ ! -f config.yaml && -f config-dist.yaml ]; then
  fi
 
  if [ "MESHTOAD" ]; then
- 	rm config.d/*
+ 	rm -f config.d/*
  	cp available.d/lora-usb-meshtoad-e22.yaml config.d
   	cfg-device="meshtoad"
-  else
-  	# assume waveshare
-   	rm config.d/*
+  fi
+  if [ "WAVESHARE" ]; then
+   	rm -f config.d/*
  	cp available.d/lora-waveshare-sxxx.yaml config.d
   	cfg-device="waveshare"
   fi
 
-  if [ ! "$cfg-device" && "$LORA-DEVICE" ];then
+  if [ ! "$cfg-device" && "$LORA-DEVICE" ]; then
+  	echo "See if $LORA-DEVICE exists
     	if [ -f available.d/"$LORA-DEVICE" ]; then
      		echo "Select $LORA-DEVICE"
-       		rm config.d/*
+       		rm -f config.d/*
  		cp available.d/"$LORA-DEVICE" config.d
   		cfg-device="$LORA-DEVICE"
    	fi
