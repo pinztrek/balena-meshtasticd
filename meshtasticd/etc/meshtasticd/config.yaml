@@ -10,6 +10,7 @@ Lora:
  IRQ: 16
  Busy: 20
  Reset: 18
+ SX126X_ANT_SW: 6
 
 #  Module: sx1262  # Waveshare SX1302 LISTEN ONLY AT THIS TIME!
 #  CS: 7
@@ -143,3 +144,4 @@ Webserver:
 
 General:
   MaxNodes: 200
+  MACAddressSource: eth0
