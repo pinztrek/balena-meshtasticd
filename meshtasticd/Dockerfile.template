@@ -33,4 +33,4 @@ COPY etc/ /etc/
 
 RUN ls -l /etc/meshtasticd
 
-CMD ["/etc/meshtasticd/run_md.sh"]
+CMD ["/bin/bash /etc/mesh*d/run_md.sh"]
