@@ -1,15 +1,16 @@
 #!/bin/bash
 
-if [ "$DEBUG" ]; then
-	DELAY=120
+if [ "$LORA_DEBUG" ]; then
+	DELAY=180
 fi
 
-if [ ! "$DELAY" ]; then
-	DELAY=5
+if [ ! "$LORA_DELAY" ]; then
+	LORA_DELAY=5
 fi
-
+echo "do cd"
 # install a default config.yaml if needed
 cd /etc/meshtasticd
+echo "do pwd"
 pwd
 
 if [ "$LORA_RESET" ]; then
@@ -52,5 +53,5 @@ ls -l "/dev/spi*" 2>/dev/null
 
 # run the daemon
 meshtasticd
-echo "meshtasticd exited, sleeping $DELAY seconds"
-sleep $DELAY
+echo "meshtasticd exited, sleeping $LORA_DELAY seconds"
+sleep $LORA_DELAY
