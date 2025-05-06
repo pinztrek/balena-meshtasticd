@@ -9,8 +9,8 @@ if [ ! "$DELAY" ];then
 fi
 
 # check for spi
-lsmod | grep -i spi
-ls -l /dev/spi
+lsmod 2>/dev/null | grep -i spi
+ls -l "/dev/spi*" 2>/dev/null
 
 # run the daemon
 meshtasticd
