@@ -143,3 +143,4 @@ Webserver:
 
 General:
   MaxNodes: 200
+  MACAddressSource: eth0
