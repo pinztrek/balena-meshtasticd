@@ -63,7 +63,7 @@ if [ "$LORA_SANE_US" ];then
  	LORA_PRESET="LONG_FAST"
   	LORA_CHAN_URL="https://meshtastic.org/e/#CgMSAQESCAgBOAFAA0gB"
 fi
-
+set -x
 if [ "$LORA_REG" ]; then
   	meshtastic --set lora.region "$LORA_REG"
 fi
