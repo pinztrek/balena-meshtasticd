@@ -1,15 +1,36 @@
 # <kbd><img src="assets/images/balena-icon.png" alt="balena.io logo" width="60" style="border-radius:45%"/></kbd> <kbd><img src="meshtastic-logo.png" alt="meshtastic logo" width="60" style="border-radius:45%" /></kbd> balena-meshtasticd
-Meshtastic Linux Native Application with Charlie Unicorn magic on your PiZero W 2! 
+This is a remix of Sam Eureka's balena-meshtasticd. Credit for the original goes to Sam, but much has changed that will likely never be incorporated back to the original, so it's more of a remix than fork.
+Here's the original if interested, but it no longer works due to changes in the meshtastic firmware site: https://github.com/SamEureka/balena-meshtasticd
 
-> [!CAUTION]
-> # :rotating_light:
-> **Under no circumstances** should a LoRa radio be powered on without a properly connected antenna. Doing so poses a significant risk of irreparable damage to the radio module.
->
-> A LoRa radio operates by transmitting and receiving radio waves through an antenna. When an antenna is not connected, the radio's transmitted energy has nowhere to dissipate. This causes a buildup of electrical energy within the radio module, which can lead to component failure, overheating, and permanent damage.
->
-> ***To ensure the longevity and proper function of your LoRa radio, always verify that the antenna is securely attached before powering on the device.***
+## Key differences:
+* Updated to utilize the currently maintained deb from the opensuse since it was removed from the meshtastic site
+* A script is used to run meshtasticd, which allows for configuration variables, a sane default config, etc
+* Debug mode is added which puts a sleep after the meshtasticd run to allow you to access the container for config changes
+* The configuration file structure was made persistant and is read/write
+* Current config.yaml and config structures are leverage. This allows an easy selection of commonly supported devices
+* You can reset to a default config via env variable
+* Common devices can be selected by an env variable, or a specific one from the supported configs selected
 
+# Deploy by clicking the URL/Button below:
 [![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=<https://github.com/SamEureka/balena-meshtasticd>)
+Once logged into balena, it will create a fleet and you can create your device and download the disk image
+
+# Env Variables:
+* **DEBUG** set to 1 (or anything really) to enable a default 180 second sleep after meshtasticd exits to allow editing of config files.
+* **LORA_DELAY** set to a value in seconds to create a custom delay. Overrides the **DEBUG** setting.
+* **LORA_RESET** set to 1 to return the config folder to the default. Removes any selected devices in config.d and returns to the distribution config.yaml. Remember to unset after needed!
+* **MESHTOAD** set to 1 to set the configuration to use a Meshtoad device
+* **WAVESHARE** set to 1 to set the configuration to use a Waveshare device
+* **LORA_DEVICE** set to the name of a supported device yaml file in the available.d directory
+
+# Upcoming changes:
+* Do initial meshtastic at startup config if **LORA_REGION**, **LORA_MODEM_PRESET**, and **LORA_CHANNEL_URL** are set and valid. Will likely have a region flag like **LORA_NA** that sets to sane defaults. (NA, Long Fast, and Long Fast channel)
+
+# Balena-Meshtasticd is an ideal way to run the cheap Nebra POE devices which have surfaced!
+I'll be documenting in a separate github: https://github.com/pinztrek/nebra-ont
+
+# Sam Eureka's original info:
+---
 
 ## :wrench: Hardware
 _balena-meshtastic_ has been tested with the following devices:
