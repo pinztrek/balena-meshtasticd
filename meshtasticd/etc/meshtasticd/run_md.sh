@@ -62,6 +62,18 @@ if [ ! "$cfg_device" ] && [ "$LORA_DEVICE" ]; then
   		cfg_device="$LORA_DEVICE"
    	fi
 fi
+
+# meshtastic commands have to be run after meshtasticd is up
+set -x
+# check for spi
+lsmod 2>/dev/null | grep -i spi
+ls -l "/dev/spi*" 2>/dev/null
+set +x
+
+echo "Starting meshtasticd in background"
+# run the daemon
+meshtasticd &
+
 if [ "$LORA_SANE_US" ];then
 	LORA_REG="US"
  	LORA_PRESET="LONG_FAST"
@@ -83,16 +95,8 @@ if [ "$LORA_MAC_ETHER" ]; then
   	mac_ether
 fi
 
-       		
+echo "pull meshtasticd back into foreground"
+fg       		
   	
-set -x
-# check for spi
-lsmod 2>/dev/null | grep -i spi
-ls -l "/dev/spi*" 2>/dev/null
-set +x
-
-echo "Starting meshtasticd"
-# run the daemon
-meshtasticd
 echo "meshtasticd exited, sleeping $LORA_DELAY seconds"
 sleep "$LORA_DELAY"

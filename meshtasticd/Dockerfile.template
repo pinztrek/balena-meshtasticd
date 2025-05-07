@@ -41,7 +41,8 @@ RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/he
 COPY etc/meshtasticd/* /etc/meshtasticd
 COPY etc/meshtasticd/ru* /etc/meshtasticd
 
+RUN ls -l etc/meshtasticd/run_md.sh 
 RUN chmod a+x /etc/meshtasticd/run_md.sh && \
-    ls -l /etc/meshtasticd
+    ls -l /etc/meshtasticd && date
 
 CMD ["/bin/bash", "-c", "/etc/meshtasticd/run_md.sh"]
