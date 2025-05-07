@@ -7,10 +7,10 @@ fi
 if [ ! "$LORA_DELAY" ]; then
 	LORA_DELAY=5
 fi
-echo "do cd"
+#echo "do cd"
 # install a default config.yaml if needed
-cd /etc/meshtasticd
-echo "do pwd"
+cd /etc/meshtasticd || exit
+#echo "do pwd"
 pwd
 
 if [ "$LORA_RESET" ]; then
@@ -19,7 +19,7 @@ if [ "$LORA_RESET" ]; then
 	rm -f config.yaml
  fi
 
-if [ ! -f config.yaml && -f config-dist.yaml ]; then
+if [ ! -f config.yaml ] && [ -f config-dist.yaml ]; then
 	echo "Setup default config.yaml"
 	cp config-dist.yaml config.yaml
  fi
@@ -27,21 +27,21 @@ if [ ! -f config.yaml && -f config-dist.yaml ]; then
  if [ "$MESHTOAD" ]; then
  	rm -f config.d/*
  	cp available.d/lora-usb-meshtoad-e22.yaml config.d
-  	cfg_device = "meshtoad"
+  	cfg_device="meshtoad"
   fi
-  if [ "$WAVESHARE" && ! "$cfg_device" ]; then
+  if [ "$WAVESHARE" ] && [ ! "$cfg_device" ]; then
    	rm -f config.d/*
  	cp available.d/lora-waveshare-sxxx.yaml config.d
-  	cfg_device = "waveshare"
+  	cfg_device="waveshare"
   fi
 
-  if [ ! "$cfg_device" && "$LORA_DEVICE" ]; then
-  	echo "See if $LORA_DEVICE exists
+  if [ ! "$cfg_device" ] && [ "$LORA_DEVICE" ]; then
+  	echo "See if $LORA_DEVICE exists"
     	if [ -f available.d/"$LORA_DEVICE" ]; then
      		echo "Select $LORA_DEVICE"
        		rm -f config.d/*
  		cp available.d/"$LORA_DEVICE" config.d
-  		cfg_device = "$LORA_DEVICE"
+  		cfg_device="$LORA_DEVICE"
    	fi
     fi
        		
@@ -54,4 +54,4 @@ ls -l "/dev/spi*" 2>/dev/null
 # run the daemon
 meshtasticd
 echo "meshtasticd exited, sleeping $LORA_DELAY seconds"
-sleep $LORA_DELAY
+sleep "$LORA_DELAY"
