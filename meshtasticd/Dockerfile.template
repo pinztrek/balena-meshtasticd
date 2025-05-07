@@ -33,7 +33,7 @@ RUN echo "alias ll='ls -l'" >> /etc/bash*rc && \
     echo "set -o vi" >> /etc/bash*rc
 
 #RUN rm -rf /etc/meshtasticd/ru*
-COPY etc/ /etc/
+COPY etc/* /etc/
 
 RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
 
