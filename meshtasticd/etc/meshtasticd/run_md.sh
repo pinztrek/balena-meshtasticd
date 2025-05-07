@@ -2,8 +2,11 @@
 cfgdir=/etc/meshtasticd
 
 mac_ether () {
+	
+	echo "Setting MAC to ether"
 	cp $cfgdir/config.yaml $cfgdir/config.last
 	sed -i 's/#  MACAddressSource/  MACAddressSource/' $cfgdir/config.yaml
+ 	grep MAC $cfgdir/config.yaml
 }
 
 if [ "$LORA_DEBUG" ] && [ ! "$LORA_DELAY" ]; then
@@ -13,10 +16,9 @@ fi
 if [ ! "$LORA_DELAY" ]; then
 	LORA_DELAY=5
 fi
-#echo "do cd"
+
 # install a default config.yaml if needed
 cd /etc/meshtasticd || exit
-#echo "do pwd"
 pwd
 
 if [ "$LORA_RESET" ]; then
