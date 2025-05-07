@@ -12,10 +12,12 @@ Here's the original if interested, but it no longer works due to changes in the 
 * Common devices can be selected by an env variable, or a specific one from the supported configs selected
 
 # Deploy by clicking the URL/Button below:
-[![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=<https://github.com/SamEureka/balena-meshtasticd>)
+[![balena deploy button](https://balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=<https://github.com/pinztrek/balena-meshtasticd>) 
+Or:(https://dashboard.balena-cloud.com/deploy?repoUrl=<https://github.com/pinztrek/balena-meshtasticd>)
 Once logged into balena, it will create a fleet and you can create your device and download the disk image
 
 # Env Variables:
+Balena Device or Fleet environment variables can be used to set config and change behavior of a fleet or an individual device. 
 * **DEBUG** set to 1 (or anything really) to enable a default 180 second sleep after meshtasticd exits to allow editing of config files.
 * **LORA_DELAY** set to a value in seconds to create a custom delay. Overrides the **DEBUG** setting.
 * **LORA_RESET** set to 1 to return the config folder to the default. Removes any selected devices in config.d and returns to the distribution config.yaml. Remember to unset after needed!
@@ -24,7 +26,7 @@ Once logged into balena, it will create a fleet and you can create your device a
 * **LORA_DEVICE** set to the name of a supported device yaml file in the available.d directory
 
 # Upcoming changes:
-* Do initial meshtastic at startup config if **LORA_REGION**, **LORA_MODEM_PRESET**, and **LORA_CHANNEL_URL** are set and valid. Will likely have a region flag like **LORA_NA** that sets to sane defaults. (NA, Long Fast, and Long Fast channel)
+* Do initial meshtastic config at startup if **LORA_REGION**, **LORA_MODEM_PRESET**, and **LORA_CHANNEL_URL** are set and valid. Will likely have a region flag like **LORA_NA** that sets to sane defaults. (NA, Long Fast, and Long Fast channel)
 
 # Balena-Meshtasticd is an ideal way to run the cheap Nebra POE devices which have surfaced!
 I'll be documenting in a separate github: https://github.com/pinztrek/nebra-ont
