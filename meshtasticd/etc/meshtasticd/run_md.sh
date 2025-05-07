@@ -6,7 +6,7 @@ mac_ether () {
 	sed -i 's/#  MACAddressSource/  MACAddressSource/' $cfgdir/config.yaml
 }
 
-if [ "$LORA_DEBUG" ]; then
+if [ "$LORA_DEBUG" ] && [ ! "$LORA_DELAY" ]; then
 	LORA_DELAY=180
 fi
 
