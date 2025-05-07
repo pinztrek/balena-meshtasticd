@@ -39,10 +39,12 @@ RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/he
 #RUN rm -rf /etc/meshtasticd/ru*
 #COPY etc/* /etc/
 COPY etc/meshtasticd/* /etc/meshtasticd
-COPY etc/meshtasticd/ru* /etc/meshtasticd
+#COPY etc/meshtasticd/ru* /etc/meshtasticd
+COPY --chmod=755  etc/meshtasticd/ru* /usr/local/bin
 
-RUN ls -l etc/meshtasticd/run_md.sh 
-RUN chmod a+x /etc/meshtasticd/run_md.sh && \
-    ls -l /etc/meshtasticd && date
+#RUN ls -l etc/meshtasticd/run_md.sh 
+RUN ls -l /usr/local/bin/run_md.sh && date
+#RUN chmod a+x /etc/meshtasticd/run_md.sh && \
+#    ls -l /etc/meshtasticd && date
 
-CMD ["/bin/bash", "-c", "/etc/meshtasticd/run_md.sh"]
+CMD ["/bin/bash", "-c", "/usr/local/bin/run_md.sh"]
