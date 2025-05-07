@@ -12,8 +12,8 @@ Here's the original if interested, but it no longer works due to changes in the 
 * Common devices can be selected by an env variable, or a specific one from the supported configs selected
 
 # Deploy by clicking the URL/Button below:
-[![balena deploy button](https://balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=<https://github.com/pinztrek/balena-meshtasticd>) 
-Or:(https://dashboard.balena-cloud.com/deploy?repoUrl=<https://github.com/pinztrek/balena-meshtasticd>)
+[![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/pinztrek/balena-meshtasticd) 
+Or:(https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/pinztrek/balena-meshtasticd)
 Once logged into balena, it will create a fleet and you can create your device and download the disk image
 
 # Env Variables:
@@ -24,6 +24,12 @@ Balena Device or Fleet environment variables can be used to set config and chang
 * **MESHTOAD** set to 1 to set the configuration to use a Meshtoad device
 * **WAVESHARE** set to 1 to set the configuration to use a Waveshare device
 * **LORA_DEVICE** set to the name of a supported device yaml file in the available.d directory
+* **MAC_ETHER** set to 1 to set the mac address to be that of the ether interface (needed for waveshare)
+* Future Vars:
+* **LORA_REG** set to the desired region (US, EU_433, etc.)
+* **LORA_PRESET** set to desired LORA preset (LONG_FAST, etc.)
+* **LORA_CHAN_URL** set to desired LORA channel url
+* **LORA_ADMIN** set to the public key of the node you want to have admin the target
 
 # Upcoming changes:
 * Do initial meshtastic config at startup if **LORA_REGION**, **LORA_MODEM_PRESET**, and **LORA_CHANNEL_URL** are set and valid. Will likely have a region flag like **LORA_NA** that sets to sane defaults. (NA, Long Fast, and Long Fast channel)
