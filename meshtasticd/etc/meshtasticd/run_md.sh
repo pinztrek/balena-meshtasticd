@@ -1,4 +1,10 @@
 #!/bin/bash
+cfgdir=/etc/meshtasticd
+
+mac_ether () {
+	cp $cfgdir/config.yaml $cfgdir/config.last
+	sed -i 's/#  MACAddressSource/  MACAddressSource/' $cfgdir/config.yaml
+}
 
 if [ "$LORA_DEBUG" ]; then
 	LORA_DELAY=180
@@ -14,28 +20,36 @@ cd /etc/meshtasticd || exit
 pwd
 
 if [ "$LORA_RESET" ]; then
+	if [ ! -d "$cfgdir"/config.last ];then
+ 		mkdir -p "$cfgdir"/config.last
+        fi
+	echo "Save Old Config in config.last"
+        cp "$cfgdir"/config.d/* "$cfgdir"/config.last
+     	cp "$cfgdir"/config.yaml "$cfgdir"/config.last
 	echo "Deleting Old Config"
 	rm -f config.d/*
 	rm -f config.yaml
- fi
+fi
 
 if [ ! -f config.yaml ] && [ -f config-dist.yaml ]; then
 	echo "Setup default config.yaml"
 	cp config-dist.yaml config.yaml
- fi
+fi
 
- if [ "$MESHTOAD" ]; then
+if [ "$MESHTOAD" ]; then
  	rm -f config.d/*
  	cp available.d/lora-usb-meshtoad-e22.yaml config.d
   	cfg_device="meshtoad"
-  fi
-  if [ "$WAVESHARE" ] && [ ! "$cfg_device" ]; then
+fi
+if [ "$WAVESHARE" ] && [ ! "$cfg_device" ]; then
    	rm -f config.d/*
  	cp available.d/lora-waveshare-sxxx.yaml config.d
   	cfg_device="waveshare"
-  fi
+   	# waveshare needs mac address
+   	mac_ether
+fi
 
-  if [ ! "$cfg_device" ] && [ "$LORA_DEVICE" ]; then
+if [ ! "$cfg_device" ] && [ "$LORA_DEVICE" ]; then
   	echo "See if $LORA_DEVICE exists"
     	if [ -f available.d/"$LORA_DEVICE" ]; then
      		echo "Select $LORA_DEVICE"
@@ -43,13 +57,35 @@ if [ ! -f config.yaml ] && [ -f config-dist.yaml ]; then
  		cp available.d/"$LORA_DEVICE" config.d
   		cfg_device="$LORA_DEVICE"
    	fi
-    fi
+fi
+if [ "$LORA_SANE_US" ];then
+	LORA_REG="US"
+ 	LORA_PRESET="LONG_FAST"
+  	LORA_CHAN_URL="https://meshtastic.org/e/#CgMSAQESCAgBOAFAA0gB"
+fi
+
+if [ "$LORA_REG" ]; then
+  	meshtastic --set lora.region "$LORA_REG"
+fi
+
+if [ "$LORA_PRESET" ]; then
+  	meshtastic --set lora.modem_preset "$LORA_PRESET"
+fi
+if [ "$LORA_CHAN_URL" ]; then
+  	meshtastic --set lora.modem_preset "$LORA_CHAN_URL"
+fi
+
+if [ "$LORA_MAC_ETHER" ]; then
+  	mac_ether
+fi
+
        		
   	
-
+set -x
 # check for spi
 lsmod 2>/dev/null | grep -i spi
 ls -l "/dev/spi*" 2>/dev/null
+set +x
 
 # run the daemon
 meshtasticd
