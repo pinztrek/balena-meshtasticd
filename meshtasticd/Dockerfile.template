@@ -32,15 +32,16 @@ RUN source /root/.bashrc && \
 RUN echo "alias ll='ls -l'" >> /etc/bash*rc && \
     echo "set -o vi" >> /etc/bash*rc
 
+
+
+RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
+
 #RUN rm -rf /etc/meshtasticd/ru*
 #COPY etc/* /etc/
 COPY etc/meshtasticd/* /etc/meshtasticd
-
-RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
+COPY etc/meshtasticd/ru* /etc/meshtasticd
 
 RUN chmod a+x /etc/meshtasticd/run_md.sh && \
     ls -l /etc/meshtasticd
 
-#CMD [sh -c "/etc/meshtasticd/run_md.sh"]
-#CMD ["/bin/bash", "-c", "meshtasticd ; sleep 300"]
 CMD ["/bin/bash", "-c", "/etc/meshtasticd/run_md.sh"]
