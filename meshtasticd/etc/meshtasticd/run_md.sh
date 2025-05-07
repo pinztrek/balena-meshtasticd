@@ -1,6 +1,8 @@
 #!/bin/bash
 cfgdir=/etc/meshtasticd
 
+echo "Starting run_md.sh"
+
 mac_ether () {
 	
 	echo "Setting MAC to ether"
@@ -89,6 +91,7 @@ lsmod 2>/dev/null | grep -i spi
 ls -l "/dev/spi*" 2>/dev/null
 set +x
 
+echo "Starting meshtasticd"
 # run the daemon
 meshtasticd
 echo "meshtasticd exited, sleeping $LORA_DELAY seconds"
