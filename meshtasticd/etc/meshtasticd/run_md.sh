@@ -111,6 +111,7 @@ fi
 if [ -f /tmp/setradio.sh ]; then
     echo run the radio setup script
     cat /tmp/setradio.sh
+    echo "Queue /tmp/setradio.sh"
     bash /tmp/setradio.sh &
 fi
 
@@ -123,8 +124,5 @@ echo "Starting meshtasticd"
 # run the daemon
 meshtasticd 
 
-#echo "pull meshtasticd back into foreground"
-#fg       		
-  	
 echo "meshtasticd exited, sleeping $LORA_DELAY seconds"
 sleep "$LORA_DELAY"
