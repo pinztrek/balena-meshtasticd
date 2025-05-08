@@ -103,7 +103,7 @@ fi
 # url is more problematic, do it separately
 if [ "$LORA_CHAN_URL" ]; then
   	#meshtastic --set lora.modem_preset "$LORA_CHAN_URL"
-  	 mdstr=" --ch-set-url $LORA_CHAN_URL"
+  	 mdstr=" --ch-set-url \'$LORA_CHAN_URL\'"
     echo "sleep 7; meshtastic $mdstr&"
     sleep 7; meshtastic "$mdstr"&
 fi
