@@ -66,7 +66,8 @@ fi
 
 if [ "$GPS" ]; then
     echo "Enable GPS $GPS"
-	sed -i 's]#  SerialPath:.*$]  SerialPath: /dev/spi0.1]' $cfgdir/config.yaml
+	sed -i "s,#  SerialPath:.*$,  SerialPath: $GPS," $cfgdir/config.yaml
+    grep -i serialpath $cfgdir/config.yaml
 fi
 
 
