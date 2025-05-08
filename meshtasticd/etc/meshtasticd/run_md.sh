@@ -97,7 +97,7 @@ fi
 # Queue some meshtastic commands to run in background
 if [ "$mdstr" ]; then
     #echo "sleep 5; meshtastic $mdstr&"
-    echo "meshtastic $mdstr" >> /tmp/setradio.sh
+    echo "sleep 5;meshtastic $mdstr" >> /tmp/setradio.sh
 fi
 
 # url is more problematic, do it separately
@@ -105,14 +105,13 @@ if [ "$LORA_CHAN_URL" ]; then
   	#meshtastic --set lora.modem_preset "$LORA_CHAN_URL"
   	 mdstr=" --ch-set-url $LORA_CHAN_URL"
     echo "meshtastic $mdstr" >> /tmp/setradio.sh
-    #echo "sleep 7; meshtastic $mdstr&"
-    #sleep 7; meshtastic "$mdstr" &
+    echo "sleep 5;meshtastic $mdstr" >> /tmp/setradio.sh
 fi
 
 if [ -f /tmp/setradio.sh ]; then
     echo run the radio setup script
     cat /tmp/setradio.sh
-    sleep 5; bash /tmp/setradio.sh &
+    bash /tmp/setradio.sh &
 fi
 
 if [ "$LORA_MAC_ETHER" ]; then
