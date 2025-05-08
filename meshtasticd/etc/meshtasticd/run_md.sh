@@ -104,7 +104,7 @@ fi
 if [ "$LORA_CHAN_URL" ]; then
   	#meshtastic --set lora.modem_preset "$LORA_CHAN_URL"
   	 mdstr=" --ch-set-url $LORA_CHAN_URL"
-    echo "meshtastic $mdstr" >> /tmp/setradio.sh
+    #echo "meshtastic $mdstr" >> /tmp/setradio.sh
     echo "sleep 5;meshtastic $mdstr" >> /tmp/setradio.sh
 fi
 
