@@ -112,7 +112,7 @@ fi
 if [ -f /tmp/setradio.sh ]; then
     echo run the radio setup script
     cat /tmp/setradio.sh
-    bash /tmp/setradio.sh
+    sleep 5; bash /tmp/setradio.sh &
 fi
 
 if [ "$LORA_MAC_ETHER" ]; then
