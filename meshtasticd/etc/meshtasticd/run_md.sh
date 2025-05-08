@@ -112,7 +112,8 @@ if [ -f /tmp/setradio.sh ]; then
     echo run the radio setup script
     cat /tmp/setradio.sh
     echo "Queue /tmp/setradio.sh"
-    bash /tmp/setradio.sh &
+    # disable for now, causes radio to reboot
+    #bash /tmp/setradio.sh &
 fi
 
 if [ "$LORA_MAC_ETHER" ]; then
