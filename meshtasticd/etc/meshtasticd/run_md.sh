@@ -63,6 +63,12 @@ if [ ! "$cfg_device" ] && [ "$LORA_DEVICE" ]; then
    	fi
 fi
 
+
+if [ "$GPS" ]; then
+	sed -i 's/#  SerialPath:/  SerialPath:/' $cfgdir/config.yaml
+fi
+
+
 # meshtastic commands have to be run after meshtasticd is up
 set -x
 # check for spi
