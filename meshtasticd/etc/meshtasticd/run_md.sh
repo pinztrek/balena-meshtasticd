@@ -78,10 +78,6 @@ lsmod 2>/dev/null | grep -i spi
 ls -l "/dev/spi*" 2>/dev/null
 set +x
 
-echo "Starting meshtasticd in background"
-# run the daemon
-meshtasticd &
-
 if [ "$LORA_SANE_US" ];then
 	LORA_REG="US"
  	LORA_PRESET="LONG_FAST"
@@ -89,22 +85,35 @@ if [ "$LORA_SANE_US" ];then
 fi
 set -x
 if [ "$LORA_REG" ]; then
-  	meshtastic --set lora.region "$LORA_REG"
+  	#meshtastic --set lora.region "$LORA_REG"
+  	mdstr="$mdstr --set lora.region $LORA_REG"
 fi
 
 if [ "$LORA_PRESET" ]; then
-  	meshtastic --set lora.modem_preset "$LORA_PRESET"
+  	#meshtastic --set lora.modem_preset "$LORA_PRESET"
+  	 mdstr="$mdstr --set lora.modem_preset $LORA_PRESET"
 fi
 if [ "$LORA_CHAN_URL" ]; then
-  	meshtastic --set lora.modem_preset "$LORA_CHAN_URL"
+  	#meshtastic --set lora.modem_preset "$LORA_CHAN_URL"
+  	 mdstr="$mdstr --set lora.modem_preset $LORA_CHAN_URL"
 fi
 
 if [ "$LORA_MAC_ETHER" ]; then
   	mac_ether
 fi
 
-echo "pull meshtasticd back into foreground"
-fg       		
+# Queue some meshtastic commands to run in background
+if [ "$mdstr" ]; then
+    echo "sleep 5; meshtastic $mdstr&"
+    sleep 5; meshtastic "$mdstr"&
+fi
+
+echo "Starting meshtasticd"
+# run the daemon
+meshtasticd 
+
+#echo "pull meshtasticd back into foreground"
+#fg       		
   	
 echo "meshtasticd exited, sleeping $LORA_DELAY seconds"
 sleep "$LORA_DELAY"
