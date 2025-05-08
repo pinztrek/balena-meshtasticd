@@ -95,7 +95,7 @@ if [ "$LORA_PRESET" ]; then
 fi
 if [ "$LORA_CHAN_URL" ]; then
   	#meshtastic --set lora.modem_preset "$LORA_CHAN_URL"
-  	 mdstr="$mdstr --seturl $LORA_CHAN_URL"
+  	 mdstr="$mdstr --ch-set-url $LORA_CHAN_URL"
 fi
 
 if [ "$LORA_MAC_ETHER" ]; then
