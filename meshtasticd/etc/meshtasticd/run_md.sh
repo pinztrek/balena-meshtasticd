@@ -93,20 +93,25 @@ if [ "$LORA_PRESET" ]; then
   	#meshtastic --set lora.modem_preset "$LORA_PRESET"
   	 mdstr="$mdstr --set lora.modem_preset $LORA_PRESET"
 fi
-if [ "$LORA_CHAN_URL" ]; then
-  	#meshtastic --set lora.modem_preset "$LORA_CHAN_URL"
-  	 mdstr="$mdstr --ch-set-url $LORA_CHAN_URL"
-fi
-
-if [ "$LORA_MAC_ETHER" ]; then
-  	mac_ether
-fi
 
 # Queue some meshtastic commands to run in background
 if [ "$mdstr" ]; then
     echo "sleep 5; meshtastic $mdstr&"
     sleep 5; meshtastic "$mdstr"&
 fi
+
+# url is more problematic, do it separately
+if [ "$LORA_CHAN_URL" ]; then
+  	#meshtastic --set lora.modem_preset "$LORA_CHAN_URL"
+  	 mdstr=" --ch-set-url $LORA_CHAN_URL"
+    echo "sleep 7; meshtastic $mdstr&"
+    sleep 7; meshtastic "$mdstr"&
+fi
+
+if [ "$LORA_MAC_ETHER" ]; then
+  	mac_ether
+fi
+
 
 echo "Starting meshtasticd"
 # run the daemon
