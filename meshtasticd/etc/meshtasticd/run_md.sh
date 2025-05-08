@@ -65,7 +65,7 @@ fi
 
 
 if [ "$GPS" ]; then
-	sed -i 's/#  SerialPath:/  SerialPath:/' $cfgdir/config.yaml
+	sed -i 's]#  SerialPath:.*$]  SerialPath: /dev/spi0.1]' $cfgdir/config.yaml
 fi
 
 
