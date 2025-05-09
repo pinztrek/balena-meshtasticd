@@ -2,7 +2,7 @@
 This is a remix of Sam Eureka's balena-meshtasticd. Credit for the original goes to Sam, but much has changed that will likely never be incorporated back to the original, so it's more of a remix than fork.
 Here's the original if interested, but it no longer works due to changes in the meshtastic firmware site: https://github.com/SamEureka/balena-meshtasticd
 
-##The goal for this remix is to be able to standup a meshtasticd container, and completely manage it via balena cloud with a minimal of hand editing of config files and no container editing. 
+## The goal for this remix is to be able to standup a meshtasticd container, and completely manage it via balena cloud with a minimal of hand editing of config files and no container editing. 
 
 ## Key differences:
 * Updated to utilize the currently maintained deb from the opensuse since it was removed from the meshtastic site
@@ -49,15 +49,26 @@ Balena Device or Fleet environment variables can be used to set config and chang
   
 ## Future meshtasticd Vars:
 * **LORA_ADMIN** set to the public key of the node you want to have admin the target
+* **GPS_NEBRA** set to 1 to enable kernel params to use the onboard u-blox gps on the Nebra HNT's and set the tty to the typical nebra one
 
-* Configuring the radio:
+
+# Configuring the radio:
 The radio also has to have some base settings for meshtasticd to work. It does seem to apply defaults, but complains if they are not set. The meshtastic CLI is available on the container via ssh or access via the terminal on the balena cloud page. Setting any of the following variables creates a script /etc/meshtasticd/setradio.sh which can be executed to configure the radio. This is in a persistant location, so it can be rerun if needed. 
 
 * **LORA_REG** set to the desired region (US, EU_433, etc.)
 * **LORA_PRESET** set to desired LORA preset (LONG_FAST, etc.)
 * **LORA_CHAN_URL** set to desired LORA channel url
-* ** LORA_SANE_US** set's the variables above to sane settings for the US (US, LONG_FAST, and the default Long-Fast channel)
-Note that setting any of the flags above will recreate the script. Radio settings seem to be persistant, so you only have to set them once normally. 
+* **LORA_SANE_US** set's the variables above to sane settings for the US (US, LONG_FAST, and the default Long-Fast channel)
+Note that setting any of the flags above will recreate the script. Radio settings seem to be persistant, so you only have to set them once normally.
+
+##Future radio params:
+* Position setting script. Setting the vars below will populate a script you can run to hardcode the position.
+** **SET_ALT** set to desired altitude
+** **SET_LAT** set to desired altitude
+** **SET_LON** set to desired altitude
+* Radio config import & export scripts
+** radio_export.sh to export current radio config to */etc/meshtasticd/radio.yaml* (or similar)
+** radio_import.sh to import radio config from */etc/meshtasticd/radio.yaml* (or similar)
 
 # Balena-Meshtasticd is an ideal way to run the cheap Nebra POE devices which have surfaced!
 Information on how to use the inexpensive Nebra Helium miners that have become available can be found at: (https://github.com/pinztrek/nebra-hnt-meshtasticd)
