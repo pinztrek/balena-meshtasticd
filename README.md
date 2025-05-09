@@ -1,6 +1,6 @@
 # <kbd><img src="assets/images/balena-icon.png" alt="balena.io logo" width="60" style="border-radius:45%"/></kbd> <kbd><img src="meshtastic-logo.png" alt="meshtastic logo" width="60" style="border-radius:45%" /></kbd> balena-meshtasticd
-This is a remix of Sam Eureka's balena-meshtasticd. Credit for the original goes to Sam, but much has changed that will likely never be incorporated back to the original, so it's more of a remix than fork.
-Here's the original if interested, but it no longer works due to changes in the meshtastic firmware site: https://github.com/SamEureka/balena-meshtasticd
+This is a remix of [Sam Eureka's balena-meshtasticd](https://github.com/SamEureka/balena-meshtasticd). Credit for the original goes to Sam, but much has changed that will likely never be incorporated back to the original, so it's more of a remix than fork.
+Here's the original if interested, but it no longer works due to changes in the meshtastic firmware site: (https://github.com/SamEureka/balena-meshtasticd)
 
 ## The goal for this remix is to be able to standup a meshtasticd container, and completely manage it via balena cloud with a minimal of hand editing of config files and no container editing. 
 
