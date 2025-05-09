@@ -61,7 +61,7 @@ The radio also has to have some base settings for meshtasticd to work. It does s
 * **LORA_SANE_US** set's the variables above to sane settings for the US (US, LONG_FAST, and the default Long-Fast channel)
 Note that setting any of the flags above will recreate the script. Radio settings seem to be persistant, so you only have to set them once normally.
 
-##Future radio params:
+## Future radio params:
 * Position setting script. Setting the vars below will populate a script you can run to hardcode the position.
 ** **SET_ALT** set to desired altitude
 ** **SET_LAT** set to desired altitude
@@ -69,6 +69,9 @@ Note that setting any of the flags above will recreate the script. Radio setting
 * Radio config import & export scripts
 ** radio_export.sh to export current radio config to */etc/meshtasticd/radio.yaml* (or similar)
 ** radio_import.sh to import radio config from */etc/meshtasticd/radio.yaml* (or similar)
+
+# Release versions
+Any updates for **balena-meshtasticd* will be automatically deployed to your devices. If for some reason this creates issues you can pin to a prior release using the balena releases page. 
 
 # Balena-Meshtasticd is an ideal way to run the cheap Nebra POE devices which have surfaced!
 Information on how to use the inexpensive Nebra Helium miners that have become available can be found at: (https://github.com/pinztrek/nebra-hnt-meshtasticd)
