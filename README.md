@@ -60,7 +60,7 @@ The radio also has to have some base settings for meshtasticd to work. It does s
 Note that setting any of the flags above will recreate the script. Radio settings seem to be persistant, so you only have to set them once normally. 
 
 # Balena-Meshtasticd is an ideal way to run the cheap Nebra POE devices which have surfaced!
-I'll be documenting in a separate github: https://github.com/pinztrek/nebra-ont
+Information on how to use the inexpensive Nebra Helium miners that have become available can be found at: (https://github.com/pinztrek/nebra-hnt-meshtasticd)
 
 # Sam Eureka's original info:
 ---
