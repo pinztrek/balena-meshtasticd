@@ -9,7 +9,7 @@ Here's the original if interested, but it no longer works due to changes in the 
 * A script is used to run meshtasticd, which allows for configuration variables, a sane default config, etc
 * Debug mode is added which puts a sleep after the meshtasticd run to allow you to access the container for config changes
 * The configuration file structure was made persistant and is read/write
-* Current *config-dist.yaml* and config structures are pulled from (https://github.com/meshtastic/firmware/bin). If an existing *config.yaml* is not found one is created from *config-dist.yaml*. The *config.d* / *available.d* structure allows an easy selection of commonly supported devices. 
+* Current *config-dist.yaml* and config structures are pulled from (https://github.com/meshtastic/firmware/tree/master/bin/) and (https://github.com/meshtastic/firmware/tree/master/bin/config.d). If an existing *config.yaml* is not found one is created from *config-dist.yaml*. The *config.d* / *available.d* structure allows an easy selection of commonly supported devices. 
 * You can reset to a default config via env variable
 * Common devices can be selected by an env variable, or a specific one from the supported configs selected
 
