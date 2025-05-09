@@ -17,7 +17,7 @@ Here's the original if interested, but it no longer works due to changes in the 
 ## Create a free tier account at (https://dashboard.balena-cloud.com/login)
 
 ## Deploy by clicking the URL/Button below:
-[![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/pinztrek/balena-meshtasticd) 
+[![balena deploy button](assets/images/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/pinztrek/balena-meshtasticd) 
 Or:(https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/pinztrek/balena-meshtasticd)
 
 ## Once logged into balena, it will create a fleet for *balena-meshtstasticd* 
