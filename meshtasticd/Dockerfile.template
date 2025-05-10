@@ -2,18 +2,27 @@ FROM balenalib/%%BALENA_ARCH%%-debian-python:3.10.10-bookworm-build
 
 RUN apt update && apt install -y libgpiod-dev libyaml-cpp-dev libbluetooth-dev openssl libssl-dev libulfius-dev liborcania-dev wget curl git jq
 
+# Install the meshtastic CLI
 RUN pip install meshtastic
 
-#RUN wget -O meshtasticd.deb $(curl -s https://api.github.com/repos/meshtastic/firmware/releases/latest | jq -r '.assets[] | select(.name | endswith("_arm64.deb")) | .browser_download_url')
 
-#RUN apt install -y ./meshtasticd.deb && rm meshtasticd.deb
+#RUN echo 'deb http://download.opensuse.org/repositories/network:/Meshtastic:/beta/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/network:Meshtastic:beta.list
 
-RUN echo 'deb http://download.opensuse.org/repositories/network:/Meshtastic:/beta/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/network:Meshtastic:beta.list
-RUN curl -fsSL https://download.opensuse.org/repositories/network:Meshtastic:beta/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/network_Meshtastic_beta.gpg > /dev/null
+# Use alpha temporarily to get support for the meshtoad
+RUN echo 'deb http://download.opensuse.org/repositories/network:/Meshtastic:/alpha/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/network:Meshtastic:alpha.list
+
+#RUN curl -fsSL https://download.opensuse.org/repositories/network:Meshtastic:beta/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/network_Meshtastic_beta.gpg > /dev/null
+
+# Use alpha temporarily to get support for the meshtoad
+RUN curl -fsSL https://download.opensuse.org/repositories/network:Meshtastic:alpha/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/network_Meshtastic_alpha.gpg > /dev/null
+
 RUN apt update
 RUN apt install -y meshtasticd kmod
 
 RUN apt install -y vim-tiny nano
+
+# Install the gpsd for testing
+RUN apt install -y gpsd
 
 SHELL ["/bin/bash", "-c"]
 
@@ -23,11 +32,12 @@ RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(whic
 
 RUN source /root/.bashrc && nvm install --lts
 
-RUN source /root/.bashrc && \
-    git clone https://github.com/meshtastic/web.git /usr/share/doc/meshtasticd/web && \
-    cd /usr/share/doc/meshtasticd/web && \
-    pnpm i && \
-    pnpm build
+# Web stuff no longer needed as it's in the meshtsaticd deb
+#RUN source /root/.bashrc && \
+    #git clone https://github.com/meshtastic/web.git /usr/share/doc/meshtasticd/web && \
+    #cd /usr/share/doc/meshtasticd/web && \
+    #pnpm i && \
+    #pnpm build
 
 RUN echo "alias ll='ls -l'" >> /etc/bash*rc && \
     echo "set -o vi" >> /etc/bash*rc
@@ -36,15 +46,15 @@ RUN echo "alias ll='ls -l'" >> /etc/bash*rc && \
 
 RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
 
-#RUN rm -rf /etc/meshtasticd/ru*
-#COPY etc/* /etc/
-COPY etc/meshtasticd/* /etc/meshtasticd
-#COPY etc/meshtasticd/ru* /etc/meshtasticd
-COPY etc/meshtasticd/ru* /usr/local/bin
+# copy any preloaded cfg info (may not be needed now)
+COPY etc/meshtasticd /etc/
+
+# copy key scripts, OK if they are RO
+COPY usr/local/bin /usr/local/
 
 #RUN ls -l etc/meshtasticd/run_md.sh 
-RUN ls -l /usr/local/bin/run_md.sh && date
-RUN chmod a+x /usr/local/bin/run_md.sh && \
+RUN ls -l /usr/local/bin/*.sh && date
+RUN chmod a+x /usr/local/bin/*.sh && \
     ls -l etc/meshtasticd && date
 
 CMD ["/bin/bash", "-c", "/usr/local/bin/run_md.sh"]
