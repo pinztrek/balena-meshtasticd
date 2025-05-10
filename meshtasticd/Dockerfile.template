@@ -46,11 +46,13 @@ RUN echo "alias ll='ls -l'" >> /etc/bash*rc && \
 
 RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
 
+RUN pwd
+
 # copy any preloaded cfg info (may not be needed now)
 #COPY etc/meshtasticd /etc/
 
 # copy key scripts, OK if they are RO
-COPY usr/* /usr/
+COPY usr/local/bin/* /usr/local/bin/
 
 #RUN ls -l etc/meshtasticd/run_md.sh 
 RUN ls -l /usr/local/bin/*.sh && date
