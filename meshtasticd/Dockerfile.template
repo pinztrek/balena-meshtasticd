@@ -21,9 +21,6 @@ RUN apt install -y meshtasticd kmod
 
 RUN apt install -y vim-tiny nano
 
-# Install the gpsd for testing
-RUN apt install -y gpsd-tools
-
 SHELL ["/bin/bash", "-c"]
 
 RUN wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -42,6 +39,8 @@ RUN source /root/.bashrc && nvm install --lts
 RUN echo "alias ll='ls -l'" >> /etc/bash*rc && \
     echo "set -o vi" >> /etc/bash*rc
 
+# Install the gpsd for testing
+RUN apt install -y gpsd-tools
 
 
 RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
@@ -55,8 +54,8 @@ RUN pwd
 COPY usr/local/bin/* /usr/local/bin/
 
 #RUN ls -l etc/meshtasticd/run_md.sh 
-RUN ls -l /usr/local/bin/*.sh && date
 RUN chmod a+x /usr/local/bin/*.sh && \
     ls -l etc/meshtasticd && date
+RUN ls -l /usr/local/bin/*.sh && date
 
 CMD ["/bin/bash", "-c", "/usr/local/bin/run_md.sh"]
