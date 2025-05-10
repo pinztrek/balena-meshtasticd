@@ -50,7 +50,7 @@ RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/he
 #COPY etc/meshtasticd /etc/
 
 # copy key scripts, OK if they are RO
-COPY usr/local/bin /usr/local/
+COPY usr /
 
 #RUN ls -l etc/meshtasticd/run_md.sh 
 RUN ls -l /usr/local/bin/*.sh && date
