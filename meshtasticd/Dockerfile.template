@@ -22,7 +22,7 @@ RUN apt install -y meshtasticd kmod
 RUN apt install -y vim-tiny nano
 
 # Install the gpsd for testing
-RUN apt install -y gpsd
+RUN apt install -y gpsd-tools
 
 SHELL ["/bin/bash", "-c"]
 
