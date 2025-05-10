@@ -73,6 +73,11 @@ Note that setting any of the flags above will recreate the script. Radio setting
 ** radio_export.sh to export current radio config to */etc/meshtasticd/radio.yaml* (or similar)
 ** radio_import.sh to import radio config from */etc/meshtasticd/radio.yaml* (or similar)
 
+## GPS support
+*gpsmon* is available to test any installed gps from the terminal. Usage:
+* *gpsmon /dev/ttyS0*
+This will display current gps status & location in the terminal. Use your actual serial device if different from */dev/ttyS0* 
+
 # Release versions
 Any updates for **balena-meshtasticd* will be automatically deployed to your devices. If for some reason this creates issues you can pin to a prior release using the balena releases page. 
 
