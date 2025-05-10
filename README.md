@@ -45,11 +45,12 @@ Balena Device or Fleet environment variables can be used to set config and chang
 * **LORA_DEVICE** set to the name of a supported device yaml file in the available.d directory
 * **MAC_ETHER** set to 1 to set the mac address to be that of the ether interface (needed for waveshare)
 * **GPS** set to desired gps serial device (Ex: Set GPS to /dev/ttyAMA0 or similar)
+* **GPS** set to nebra to enable kernel params to use the onboard u-blox gps on the Nebra HNT's and set the tty to the typical nebra one
 
   
 ## Future meshtasticd Vars:
 * **LORA_ADMIN** set to the public key of the node you want to have admin the target
-* **GPS_NEBRA** set to 1 to enable kernel params to use the onboard u-blox gps on the Nebra HNT's and set the tty to the typical nebra one
+
 
 
 # Configuring the radio:
@@ -60,6 +61,8 @@ The radio also has to have some base settings for meshtasticd to work. It does s
 * **LORA_CHAN_URL** set to desired LORA channel url
 * **LORA_SANE_US** set's the variables above to sane settings for the US (US, LONG_FAST, and the default Long-Fast channel)
 Note that setting any of the flags above will recreate the script. Radio settings seem to be persistant, so you only have to set them once normally.
+
+**Note:** *sane_radio_US.sh* in */usr/local/bin* is provided as an easy way to set to typical US settings.
 
 ## Future radio params:
 * Position setting script. Setting the vars below will populate a script you can run to hardcode the position.
