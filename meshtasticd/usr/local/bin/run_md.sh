@@ -114,7 +114,8 @@ if [ "$LORA_CHAN_URL" ]; then
     echo "sleep 5;meshtastic $mdstr" >> /tmp/setradio.sh
 fi
 
-if [ -f /tmp/setradio.sh ]; then
+if [ FALSE ]; then
+#if [ -f /tmp/setradio.sh ]; then
     echo run the radio setup script
     cat /tmp/setradio.sh
     echo "Queue /tmp/setradio.sh"
