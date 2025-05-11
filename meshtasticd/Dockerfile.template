@@ -42,6 +42,8 @@ RUN echo "alias ll='ls -l'" >> /etc/bash*rc && \
 # Install the gpsd for testing
 RUN apt install -y gpsd-tools
 
+RUN apt install -y bluez bluez-tools
+
 
 RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
 
