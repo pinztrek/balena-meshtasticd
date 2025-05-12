@@ -86,6 +86,8 @@ Any updates for **balena-meshtasticd* will be automatically deployed to your dev
 # Balena-Meshtasticd is an ideal way to run the cheap Nebra POE devices which have surfaced!
 Information on how to use the inexpensive Nebra Helium miners that have become available can be found at: (https://github.com/pinztrek/nebra-hnt-meshtasticd)
 
+Set **NEBRA** *=1* will configure most required settings for the device. Select and set a radio per above and you are in business. In the future some radio presets will be automatically executed if appropriate balena config variables are set. 
+
 # Sam Eureka's original info:
 ---
 
