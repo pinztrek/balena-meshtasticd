@@ -40,7 +40,7 @@ Balena Device or Fleet environment variables can be used to set config and chang
 * **DEBUG** set to 1 (or anything really) to enable a default 180 second sleep after meshtasticd exits to allow editing of config files.
 * **LORA_DELAY** set to a value in seconds to create a custom delay. Overrides the **DEBUG** setting.
 * **LORA_RESET** set to 1 to return the config folder to the default. Removes any selected devices in config.d and returns to the distribution config.yaml. Remember to unset after needed!
-* **NEBRA** set to 1 enables multiple Nebra specific settings:
+* **NEBRA** set to 1 enables multiple Nebra-HNT-Outdoor specific settings:
 ** MAC_ETHER, GPS=/dev/ttyS0, etc
 * **MESHTOAD** set to 1 to set the configuration to use a Meshtoad device
 * **WAVESHARE** set to 1 to set the configuration to use a Waveshare device
