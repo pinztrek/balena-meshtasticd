@@ -64,6 +64,15 @@ if [ ! "$cfg_device" ] && [ "$LORA_DEVICE" ]; then
 fi
 
 
+if [ "$NEBRA" ]; then
+    echo "We have a Nebra"
+    GPS=/dev/ttyS0
+    echo "GPS is $GPS"
+    echo Use ethernet mac address
+    mac_ether
+fi
+
+# Leave this in for now
 if [ "$GPS" == "nebra" ]; then
     echo "Nebra GPS enabled"
     GPS=/dev/ttyS0

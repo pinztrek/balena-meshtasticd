@@ -13,6 +13,9 @@ services:
       - meshtasticd_data:/root/.portduino/default/prefs
       - meshtasticd_cfg:/etc/meshtasticd
       - meshtastic_web:/usr/share/doc/meshtasticd/web
+    ports:
+      - 4403:4403
+      - 443:443
     restart: unless-stopped
 
 volumes:
