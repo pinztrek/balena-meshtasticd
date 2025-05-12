@@ -41,7 +41,7 @@ Balena Device or Fleet environment variables can be used to set config and chang
 * **LORA_DELAY** set to a value in seconds to create a custom delay. Overrides the **DEBUG** setting.
 * **LORA_RESET** set to 1 to return the config folder to the default. Removes any selected devices in config.d and returns to the distribution config.yaml. Remember to unset after needed!
 * **NEBRA** set to 1 enables multiple Nebra-HNT-Outdoor specific settings:
-** MAC_ETHER, GPS=/dev/ttyS0, etc
+- **MAC_ETHER**, **GPS** *=/dev/ttyS0*, etc
 * **MESHTOAD** set to 1 to set the configuration to use a Meshtoad device
 * **WAVESHARE** set to 1 to set the configuration to use a Waveshare device
 * **LORA_DEVICE** set to the name of a supported device yaml file in the available.d directory
@@ -68,12 +68,12 @@ Note that setting any of the flags above will recreate the script. Radio setting
 
 ## Future radio params:
 * Position setting script. Setting the vars below will populate a script you can run to hardcode the position.
-** **SET_ALT** set to desired altitude
-** **SET_LAT** set to desired altitude
-** **SET_LON** set to desired altitude
+- **SET_ALT** set to desired altitude
+- **SET_LAT** set to desired altitude
+- **SET_LON** set to desired altitude
 * Radio config import & export scripts
-** radio_export.sh to export current radio config to */etc/meshtasticd/radio.yaml* (or similar)
-** radio_import.sh to import radio config from */etc/meshtasticd/radio.yaml* (or similar)
+- radio_export.sh to export current radio config to */etc/meshtasticd/radio.yaml* (or similar)
+- radio_import.sh to import radio config from */etc/meshtasticd/radio.yaml* (or similar)
 
 ## GPS support
 *gpsmon* is available to test any installed gps from the terminal. Usage:
