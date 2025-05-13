@@ -74,13 +74,14 @@ fi
 
 # Leave this in for now
 if [ "$GPS" == "nebra" ]; then
-    echo "Nebra GPS enabled"
     GPS=/dev/ttyS0
+    echo "Nebra GPS enabled $GPS"
 fi
 
 if [ "$GPS" ]; then
     echo "Enable GPS $GPS"
 	sed -i "s,#  SerialPath:.*$,  SerialPath: $GPS," $cfgdir/config.yaml
+	sed -i "s,  SerialPath:.*$,  SerialPath: $GPS," $cfgdir/config.yaml
     grep -i serialpath $cfgdir/config.yaml
 fi
 
