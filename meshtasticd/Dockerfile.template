@@ -56,6 +56,7 @@ RUN df && ln -s /etc/meshtasticd/portduino /root/.portduino && ls -al  /root
 RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
 
 # copy any preloaded cfg info (may not be needed now)
+RUN ls -al /etc/me*d
 COPY etc/meshtasticd /etc/meshtasticd-dist
 RUN ls -al /etc/me*d*
 
