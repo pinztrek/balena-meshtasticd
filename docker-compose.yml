@@ -12,9 +12,7 @@ services:
       io.balena.features.supervisor-api: '1'
       io.balena.features.balena-api: '1'
     volumes:
-      - meshtasticd_data:/root/.portduino/default/prefs
-      - meshtasticd_cfg:/etc/meshtasticd
-      - meshtastic_web:/usr/share/doc/meshtasticd/web
+      - meshtasticd_data:/etc/meshtasticd
     group_add:
       - "plugdev"
     ports:
@@ -24,5 +22,3 @@ services:
 
 volumes:
   meshtasticd_data:
-  meshtasticd_cfg:
-  meshtastic_web:

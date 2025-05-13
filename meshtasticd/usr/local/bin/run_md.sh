@@ -93,6 +93,12 @@ lsmod 2>/dev/null | grep -i spi
 ls -l "/dev/spi*" 2>/dev/null
 set +x
 
+if [ ! -d  '/root/.portduino/default/prefs' ]; then
+    # precreate the default dir so portduino does not squawk
+    mkdir -p /root/.portduino/default/prefs/ 2>/dev/null
+fi
+
+
 if [ "$LORA_SANE_US" ];then
 	LORA_REG="US"
  	LORA_PRESET="LONG_FAST"

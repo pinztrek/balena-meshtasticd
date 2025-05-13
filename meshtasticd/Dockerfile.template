@@ -47,6 +47,8 @@ RUN apt install -y gpsd-tools
 # Bluetooth redundant as it's in the Balena host OS
 #RUN apt install -y bluez bluez-tools
 
+# link portduino data dir in ~root to data volume
+RUN df && ln -s /etc/meshtasticd/portduino /root/.portduino && ls -l /etc/meshtasticd && ls -l /root
 
 # copy any preloaded cfg info (may not be needed now)
 #COPY etc/meshtasticd /etc/
