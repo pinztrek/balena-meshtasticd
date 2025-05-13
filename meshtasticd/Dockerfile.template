@@ -48,7 +48,9 @@ RUN apt install -y gpsd-tools
 #RUN apt install -y bluez bluez-tools
 
 # link portduino data dir in ~root to data volume
-RUN df && ln -s /etc/meshtasticd/portduino /root/.portduino && ls -l /etc/meshtasticd && ls -l /root
+RUN df && ls -al  /root && ls -l /etc/meshtasticd 
+RUN mv /root/.portduino /root/.portduino-dist
+RUN df && ln -s /etc/meshtasticd/portduino /root/.portduino && ls -al  /root
 
 # copy any preloaded cfg info (may not be needed now)
 #COPY etc/meshtasticd /etc/
