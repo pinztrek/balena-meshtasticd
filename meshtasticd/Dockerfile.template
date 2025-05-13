@@ -1,4 +1,5 @@
-FROM balenalib/%%BALENA_ARCH%%-debian-python:3.10.10-bookworm-build
+FROM balenalib/%%BALENA_ARCH%%-debian-python:latest-bookworm-build
+#FROM balenalib/%%BALENA_ARCH%%-debian-python:3.10.10-bookworm-build
 
 RUN apt update && apt install -y libgpiod-dev libyaml-cpp-dev libbluetooth-dev openssl libssl-dev libulfius-dev liborcania-dev wget curl git jq
 
