@@ -108,7 +108,8 @@ set +x
 
 if [ ! -d  '/root/.portduino/default/prefs' ]; then
     # precreate the default dir so portduino does not squawk
-    mkdir -p ~root/.portduino/default/prefs #2>/dev/null
+    # it's target is in /etc/me*d
+    mkdir -p /etc/meshtasticd/portduino/default/prefs #2>/dev/null
     ls -al /root/ 
     ls -al /etc/meshtasticd
 
