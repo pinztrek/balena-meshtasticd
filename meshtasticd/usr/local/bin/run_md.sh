@@ -35,6 +35,19 @@ if [ "$LORA_RESET" ]; then
 	rm -f config.yaml
 fi
 
+# Setup dirs as needed
+if [ ! -d config.d ]; then
+    mkdir config.d
+fi
+
+if [ ! -d available.d ]; then
+    cp -r /etc/meshtasticd-dist/available.d .
+fi
+
+if [ ! -f config-dist.yaml ]; then
+    cp -r /etc/meshtasticd-dist/config-dist.yaml .
+fi
+
 if [ ! -f config.yaml ] && [ -f config-dist.yaml ]; then
 	echo "Setup default config.yaml"
 	cp config-dist.yaml config.yaml
@@ -95,7 +108,9 @@ set +x
 
 if [ ! -d  '/root/.portduino/default/prefs' ]; then
     # precreate the default dir so portduino does not squawk
-    mkdir -p /root/.portduino/default/prefs/ 2>/dev/null
+    mkdir -p ~root/.portduino/default/prefs/ 2>/dev/null
+    ls -al /root/
+    
 fi
 
 
