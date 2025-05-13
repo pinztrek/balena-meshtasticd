@@ -57,6 +57,7 @@ RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/he
 
 # copy any preloaded cfg info (may not be needed now)
 RUN ls -al /etc/me*d
+
 # Make orig files/dirs available for run stage
 RUN mv /etc/meshtasticd /etc/meshtasticd-dist
 RUN ls -al /etc/me*d*
@@ -65,9 +66,8 @@ RUN ls -al /etc/me*d*
 # copy key scripts, OK if they are RO
 COPY usr/local/bin/* /usr/local/bin/
 
-#RUN ls -l etc/meshtasticd/run_md.sh 
 RUN chmod a+x /usr/local/bin/*.sh && \
-    ls -l etc/meshtasticd && date
+    date
 RUN ls -l /usr/local/bin/*.sh && date
 
 # Expose ports for web I/F
