@@ -59,6 +59,9 @@ fi
 if [ "$LORA_ROLE" ]; then
     echo "Owner set to $LORA_ROLE"
     SETTINGS="$SETTINGS --set device.role $LORA_ROLE"
+    # role change resets rebroadcast, set to all
+    SETTINGS="$SETTINGS --set device.rebroadcastMode 5"
+    
 fi
 
 
