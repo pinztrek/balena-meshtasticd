@@ -51,6 +51,17 @@ if [ "$LORA_OWNER_SHORT" ]; then
 fi
 
 
+if [ "$LORA_CH_URL" ]; then
+    echo "Owner set to $LORA_CH_URL"
+    SETTINGS="$SETTINGS --ch-set-url $LORA_CH_URL"
+fi
+
+if [ "$LORA_ROLE" ]; then
+    echo "Owner set to $LORA_ROLE"
+    SETTINGS="$SETTINGS --set device.role $LORA_ROLE"
+fi
+
+
 if [ "$GPS_MODE" ]; then
     echo "Setting GPS mode to $GPS_MODE"
     SETTINGS="$SETTINGS --set position.gps_mode $GPS_MODE"
