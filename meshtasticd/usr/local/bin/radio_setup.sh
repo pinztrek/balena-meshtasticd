@@ -79,10 +79,15 @@ if [ ! "$SETTINGS" ]; then
     exit
 fi
 
+# making some changes, touch the file
+touch /etc/meshtasticd/radio.chg
+
 echo "Setting radio to settings: /$SETTINGS/"
 
 meshtastic  $SETTINGS
 
+# exit since container dies anyway
+exit 
 delay=15
 echo "Sleeping $delay seconds to allow for reboot"
 sleep "$delay"

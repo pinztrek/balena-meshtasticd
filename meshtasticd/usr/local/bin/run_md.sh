@@ -161,6 +161,11 @@ if [ "$LORA_MAC_ETHER" ]; then
   	mac_ether
 fi
 
+if [ -f /etc/meshtasticd/radio.chg ]; then
+    echo "Save cfg after startup"
+    m_export_sleep&
+fi
+
 
 echo "Starting meshtasticd"
 # run the daemon
