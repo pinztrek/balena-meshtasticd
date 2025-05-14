@@ -73,7 +73,6 @@ fi
 #fi
 
     
-#SETTINGS="--set lora.region US --set lora.modem_preset LONG_FAST --ch-set-url https://meshtastic.org/e/#CgMSAQESCAgBOAFAA0gB"
 
 if [ ! "$SETTINGS" ]; then
     echo "Nothing to set!"
