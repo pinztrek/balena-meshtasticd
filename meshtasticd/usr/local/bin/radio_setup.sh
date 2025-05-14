@@ -69,9 +69,9 @@ if [ ! "$SETTINGS" ]; then
     exit
 fi
 
-echo "Setting radio to settings: $SETTINGS"
+echo "Setting radio to settings: /$SETTINGS/"
 
-meshtastic  "$SETTINGS"
+meshtastic  $SETTINGS
 
 delay=15
 echo "Sleeping $delay seconds to allow for reboot"
