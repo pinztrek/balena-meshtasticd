@@ -7,21 +7,21 @@ meshtastic --export-config > radio.last
 
 # start with ones which do not reboot the radio
 
-if [ "$LON" ]; then
-    echo "Longitude set to $LON"
-    SETTINGS="$SETTINGS --setlon $LON"
-fi
-    
-if [ "$LAT" ]; then
-    echo "Lattitude set to $LAT"
-    SETTINGS="$SETTINGS --setlat $LAT"
-fi
-    
 if [ "$ALT" ]; then
     echo "Altitude set to $ALT"
     SETTINGS="$SETTINGS --setalt $ALT"
 fi
 
+if [ "$LAT" ]; then
+    echo "Lattitude set to $LAT"
+    SETTINGS="$SETTINGS --setlat $LAT"
+fi
+    
+if [ "$LON" ]; then
+    echo "Longitude set to $LON"
+    SETTINGS="$SETTINGS --setlon $LON"
+fi
+    
 if [ "$NODEINFO" ]; then
     echo "Nodeinfo period set to $NODEINFO"
     SETTINGS="$SETTINGS --set device.nodeInfoBroadcastSecs $NODEINFO"
