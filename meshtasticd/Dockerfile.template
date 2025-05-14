@@ -66,7 +66,7 @@ RUN ls -al /etc/me*d*
 # copy key scripts, OK if they are RO
 COPY usr/local/bin/* /usr/local/bin/
 
-RUN chmod a+x /usr/local/bin/*.sh && \
+RUN chmod a+x /usr/local/bin/*.sh /usr/local/bin/m_* && \
     date
 RUN ls -l /usr/local/bin/*.sh && date
 
