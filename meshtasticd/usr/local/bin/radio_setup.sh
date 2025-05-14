@@ -2,6 +2,7 @@
 
 cd /etc/meshtasticd
 
+echo "Export current config to radio.last"
 meshtastic --export-config > radio.last
 
 # start with ones which do not reboot the radio
@@ -57,16 +58,22 @@ fi
 
 if [ "$LAT" ] && [ "$LON" ]; then
     echo "Lat & Lon are set, must want fixed position"
-    SETTINGS="$SETTINGS --set position.fixed_position True
+    SETTINGS="$SETTINGS --set position.fixed_position True"
 fi
 
     
 #SETTINGS="--set lora.region US --set lora.modem_preset LONG_FAST --ch-set-url https://meshtastic.org/e/#CgMSAQESCAgBOAFAA0gB"
 
-echo "Setting radio to settings: $SETTINGS"
-meshtastic  $SETTINGS
+if [ ! "$SETTINGS" ]; then
+    echo "Nothing to set!"
+    exit
+fi
 
-delay=10
+echo "Setting radio to settings: $SETTINGS"
+
+meshtastic  "$SETTINGS"
+
+delay=15
 echo "Sleeping $delay seconds to allow for reboot"
 sleep "$delay"
 meshtastic --export-config > radio.yaml
