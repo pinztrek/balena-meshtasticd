@@ -24,7 +24,7 @@ fi
 
 if [ "$NODEINFO" ]; then
     echo "Nodeinfo period set to $NODEINFO"
-    SETTINGS="$SETTINGS --set device.nodeInfoBroadcast_secs $NODEINFO"
+    SETTINGS="$SETTINGS --set device.nodeInfoBroadcastSecs $NODEINFO"
 fi
 
 if [ "$GPS_POSITION" ]; then
@@ -35,7 +35,7 @@ fi
 
 if [ "$LORA_ADMIN" ]; then
     echo "Setting Admin key $LORA_ADMIN"
-    SETTINGS="$SETTINGS --set security.adminKey 'base64:'$LORA_ADMIN"
+    SETTINGS="$SETTINGS --set security.adminKey base64:$LORA_ADMIN"
 fi
 
 # Causes reboot
