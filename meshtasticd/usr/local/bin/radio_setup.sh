@@ -24,12 +24,12 @@ fi
 
 if [ "$NODEINFO" ]; then
     echo "Nodeinfo period set to $NODEINFO"
-    SETTINGS="$SETTINGS --set device.node_info_broadcast_secs $NODEINFO"
+    SETTINGS="$SETTINGS --set device.nodeInfoBroadcast_secs $NODEINFO"
 fi
 
 if [ "$GPS_POSITION" ]; then
     echo "Nodeinfo period set to $GPS_POSITION"
-    SETTINGS="$SETTINGS --set position.position_broadcast_secs $GPS_POSITION"
+    SETTINGS="$SETTINGS --set position.positionBroadcastSecs $GPS_POSITION"
 fi
 
 
@@ -56,10 +56,10 @@ if [ "$GPS_MODE" ]; then
     SETTINGS="$SETTINGS --set position.gps_mode $GPS_MODE"
 fi
 
-if [ "$LAT" ] && [ "$LON" ]; then
-    echo "Lat & Lon are set, must want fixed position"
-    SETTINGS="$SETTINGS --set position.fixed_position True"
-fi
+#if [ "$LAT" ] && [ "$LON" ]; then
+    #echo "Lat & Lon are set, must want fixed position"
+    #SETTINGS="$SETTINGS --set position.fixedPosition True"
+#fi
 
     
 #SETTINGS="--set lora.region US --set lora.modem_preset LONG_FAST --ch-set-url https://meshtastic.org/e/#CgMSAQESCAgBOAFAA0gB"
