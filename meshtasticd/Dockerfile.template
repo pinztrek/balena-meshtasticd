@@ -46,9 +46,9 @@ RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/he
 # Get Walt's nebramesh hat config files  (will end up in m*d-dist)
 RUN pwd
 RUN wget -O /etc/meshtasticd/available.d/NebraHat_1W.yaml https://github.com/wehooper4/Meshtastic-Hardware/raw/refs/heads/main/NebraHat/NebraHat_1W.yaml
-RUN sed -i 's/#  CS/  CS/ /etc/meshtasticd/available.d/NebraHat_1W.yaml'
+RUN sed -i 's/#  CS/  CS/' /etc/meshtasticd/available.d/NebraHat_1W.yaml
 RUN wget -O /etc/meshtasticd/available.d/NebraHat_2W.yaml https://github.com/wehooper4/Meshtastic-Hardware/raw/refs/heads/main/NebraHat/NebraHat_2W.yaml
-RUN sed -i 's/#  CS/  CS/ /etc/meshtasticd/available.d/NebraHat_2W.yaml'
+RUN sed -i 's/#  CS/  CS/' /etc/meshtasticd/available.d/NebraHat_2W.yaml
 RUN ls -al /etc/meshtasticd/available.d
 
 
