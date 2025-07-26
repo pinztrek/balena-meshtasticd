@@ -6,54 +6,43 @@ RUN apt update && apt install -y libgpiod-dev libyaml-cpp-dev libbluetooth-dev o
 # Install the meshtastic CLI
 RUN pip install meshtastic
 
-
-#RUN echo 'deb http://download.opensuse.org/repositories/network:/Meshtastic:/beta/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/network:Meshtastic:beta.list
-
-# Use alpha temporarily to get support for the meshtoad
-RUN echo 'deb http://download.opensuse.org/repositories/network:/Meshtastic:/alpha/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/network:Meshtastic:alpha.list
-
-#RUN curl -fsSL https://download.opensuse.org/repositories/network:Meshtastic:beta/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/network_Meshtastic_beta.gpg > /dev/null
+# Beta firmware OK now as it has meshtoad support
+RUN echo 'deb http://download.opensuse.org/repositories/network:/Meshtastic:/beta/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/network:Meshtastic:beta.list
+RUN curl -fsSL https://download.opensuse.org/repositories/network:Meshtastic:beta/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/network_Meshtastic_beta.gpg > /dev/null
 
 # Use alpha temporarily to get support for the meshtoad
-RUN curl -fsSL https://download.opensuse.org/repositories/network:Meshtastic:alpha/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/network_Meshtastic_alpha.gpg > /dev/null
+#RUN echo 'deb http://download.opensuse.org/repositories/network:/Meshtastic:/alpha/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/network:Meshtastic:alpha.list
+#RUN curl -fsSL https://download.opensuse.org/repositories/network:Meshtastic:alpha/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/network_Meshtastic_alpha.gpg > /dev/null
 
 RUN apt update
-RUN apt install -y meshtasticd kmod
-
-RUN apt install -y vim-tiny nano
+RUN apt install -y meshtasticd kmod vim-tiny nano
 
 SHELL ["/bin/bash", "-c"]
 
 # Is the node stuff still needed? Was this for the web module?
 #RUN wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-
 #RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
-
 #RUN source /root/.bashrc && nvm install --lts
 
-# Web stuff no longer needed as it's in the meshtsaticd deb
-#RUN source /root/.bashrc && \
-    #git clone https://github.com/meshtastic/web.git /usr/share/doc/meshtasticd/web && \
-    #cd /usr/share/doc/meshtasticd/web && \
-    #pnpm i && \
-    #pnpm build
-
+# Setup some bash aliases
 RUN echo "alias ll='ls -l'" >> /etc/bash*rc && \
     echo "set -o vi" >> /etc/bash*rc
 
 # Install the gpsd for testing
 RUN apt install -y gpsd-tools
 
-# Bluetooth redundant as it's in the Balena host OS
-#RUN apt install -y bluez bluez-tools
-
-# link portduino data dir in ~root to data volume
+# link portduino data dir in ~root to data volume 
+# this needs to be adopted to the non-root approach and /var/lib
 RUN df && ls -al  /root && ls -l /etc/meshtasticd 
 #RUN mv /root/.portduino /root/.portduino-dist
 RUN df && ln -s /etc/meshtasticd/portduino /root/.portduino && ls -al  /root
 
 # Get the dist config.yaml
 RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
+
+# Get Walt's nebramesh hat config files
+wget -O /etc/meshtasticd/available.d/NebraHat_1W.yaml https://github.com/wehooper4/Meshtastic-Hardware/raw/refs/heads/main/NebraHat/NebraHat_1W.yaml
+wget -O /etc/meshtasticd/available.d/NebraHat_2W.yaml https://github.com/wehooper4/Meshtastic-Hardware/raw/refs/heads/main/NebraHat/NebraHat_2W.yaml
 
 # copy any preloaded cfg info (may not be needed now)
 RUN ls -al /etc/me*d
