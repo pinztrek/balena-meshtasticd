@@ -37,19 +37,21 @@ RUN df && ls -al  /root && ls -l /etc/meshtasticd
 #RUN mv /root/.portduino /root/.portduino-dist
 RUN df && ln -s /etc/meshtasticd/portduino /root/.portduino && ls -al  /root
 
-# Get the dist config.yaml
-RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
-
-# Get Walt's nebramesh hat config files
-RUN wget -O /etc/meshtasticd/available.d/NebraHat_1W.yaml https://github.com/wehooper4/Meshtastic-Hardware/raw/refs/heads/main/NebraHat/NebraHat_1W.yaml
-RUN wget -O /etc/meshtasticd/available.d/NebraHat_2W.yaml https://github.com/wehooper4/Meshtastic-Hardware/raw/refs/heads/main/NebraHat/NebraHat_2W.yaml
-
 # copy any preloaded cfg info (may not be needed now)
 RUN ls -al /etc/me*d
 
 # Make orig files/dirs available for run stage
 RUN mv /etc/meshtasticd /etc/meshtasticd-dist
 RUN ls -al /etc/me*d*
+
+# Get the dist config.yaml
+RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
+
+# Get Walt's nebramesh hat config files
+RUN pwd
+RUN wget -O /etc/meshtasticd/available.d/NebraHat_1W.yaml https://github.com/wehooper4/Meshtastic-Hardware/raw/refs/heads/main/NebraHat/NebraHat_1W.yaml
+RUN wget -O /etc/meshtasticd/available.d/NebraHat_2W.yaml https://github.com/wehooper4/Meshtastic-Hardware/raw/refs/heads/main/NebraHat/NebraHat_2W.yaml
+RUN ls -al /etc/meshtasticd/available.d
 
 
 # copy key scripts, OK if they are RO
