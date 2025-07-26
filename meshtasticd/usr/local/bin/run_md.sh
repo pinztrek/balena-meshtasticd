@@ -40,9 +40,10 @@ if [ ! -d config.d ]; then
     mkdir config.d
 fi
 
-if [ ! -d available.d ]; then
+# always refresh available.d
+#if [ ! -d available.d ]; then
     cp -r /etc/meshtasticd-dist/available.d .
-fi
+#fi
 
 if [ ! -f config-dist.yaml ]; then
     cp -r /etc/meshtasticd-dist/config-dist.yaml .
@@ -58,6 +59,19 @@ if [ "$MESHTOAD" ]; then
  	cp available.d/lora-usb-meshtoad-e22.yaml config.d
   	cfg_device="meshtoad"
 fi
+
+if [ "$NEBRAHAT_1W" ]; then
+ 	rm -f config.d/*
+ 	cp available.d/NebraHat_1W.yaml config.d
+  	cfg_device="NebraHat_1W"
+fi
+
+if [ "$NEBRAHAT_2W" ]; then
+ 	rm -f config.d/*
+ 	cp available.d/NebraHat_2W.yaml config.d
+  	cfg_device="NebraHat_2W"
+fi
+
 if [ "$WAVESHARE" ] && [ ! "$cfg_device" ]; then
    	rm -f config.d/*
  	cp available.d/lora-waveshare-sxxx.yaml config.d
@@ -109,6 +123,7 @@ set +x
 if [ ! -d  '/root/.portduino/default/prefs' ]; then
     # precreate the default dir so portduino does not squawk
     # it's target is in /etc/me*d
+    # this needs to move to /var/lib
     mkdir -p /etc/meshtasticd/portduino/default/prefs #2>/dev/null
     ls -al /root/ 
     ls -al /etc/meshtasticd
