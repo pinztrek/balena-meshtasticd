@@ -134,6 +134,7 @@ fi
 # put the nodes in /tmp to reduce disk writes
 # save the old file so the symlink will work
 if [[ -s /etc/meshtasticd/portduino/default/prefs/nodes.proto ]]; then
+    rm -f  /etc/meshtasticd/portduino/default/prefs/nodes.last
     mv  /etc/meshtasticd/portduino/default/prefs/nodes.proto /etc/meshtasticd/portduino/default/prefs/nodes.last
     cp /etc/meshtasticd/portduino/default/prefs/nodes.last /tmp/nodes.proto 
     chown meshtasticd:meshtasticd /tmp/nodes.proto 
@@ -196,6 +197,11 @@ fi
 echo "Starting meshtasticd"
 # run the daemon
 meshtasticd 
+
+if [[ -s /tmp/nodes.proto ]]; then
+    echo "Save /tmp/nodes.proto"
+    cp /tmp/nodes.proto  /etc/meshtasticd/portduino/default/prefs/nodes.proto
+fi
 
 echo "meshtasticd exited, sleeping $LORA_DELAY seconds"
 sleep "$LORA_DELAY"
