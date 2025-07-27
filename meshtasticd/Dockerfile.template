@@ -26,7 +26,9 @@ SHELL ["/bin/bash", "-c"]
 
 # Setup some bash aliases
 RUN echo "alias ll='ls -l'" >> /etc/bash*rc && \
-    echo "set -o vi" >> /etc/bash*rc
+    echo "set -o vi" >> /etc/bash*rc && \
+    echo "cd /etc/meshtasticd >> /etc/bash*rc
+    
 
 # Install the gpsd for testing
 RUN apt install -y gpsd-tools
@@ -34,35 +36,39 @@ RUN apt install -y gpsd-tools
 # link portduino data dir in ~root to data volume 
 # this needs to be adopted to the non-root approach and /var/lib
 RUN df && ls -al  /root && ls -l /etc/meshtasticd 
-#RUN mv /root/.portduino /root/.portduino-dist
-RUN df && ln -s /etc/meshtasticd/portduino /root/.portduino && ls -al  /root
+RUN df && ln -s /etc/meshtasticd/portduino /root/.portduino && ls -al  /root && ls -al /etc/me*d
+
+# put the nodes in /tmp to reduce disk writes
+RUN mkdir -p /etc/meshtasticd/portduino/default/prefs && chown meshtastic:meshtastic /etc/meshtasticd/portduino/default/prefs && \
+    touch /tmp/nodes.proto && chown meshtastic:meshtastic /tmp/nodes.proto && \
+    ln -s /tmp/nodes.proto /etc/meshtasticd/portduino/default/prefs/nodes.proto
 
 # copy any preloaded cfg info (may not be needed now)
-RUN ls -al /etc/me*d
+#RUN ls -al /etc/me*d
 
 # Get the dist config.yaml (will end up in m*d-dist)
 RUN wget -P /etc/meshtasticd "https://github.com/meshtastic/firmware/raw/refs/heads/master/bin/config-dist.yaml"
 
 # Get Walt's nebramesh hat config files  (will end up in m*d-dist)
-RUN pwd
-RUN wget -O /etc/meshtasticd/available.d/NebraHat_1W.yaml https://github.com/wehooper4/Meshtastic-Hardware/raw/refs/heads/main/NebraHat/NebraHat_1W.yaml
-RUN sed -i 's/#  CS/  CS/' /etc/meshtasticd/available.d/NebraHat_1W.yaml
-RUN wget -O /etc/meshtasticd/available.d/NebraHat_2W.yaml https://github.com/wehooper4/Meshtastic-Hardware/raw/refs/heads/main/NebraHat/NebraHat_2W.yaml
-RUN sed -i 's/#  CS/  CS/' /etc/meshtasticd/available.d/NebraHat_2W.yaml
-RUN ls -al /etc/meshtasticd/available.d
+RUN pwd && \
+    wget -O /etc/meshtasticd/available.d/NebraHat_1W.yaml https://github.com/wehooper4/Meshtastic-Hardware/raw/refs/heads/main/NebraHat/NebraHat_1W.yaml && \
+    sed -i 's/#  CS/  CS/' /etc/meshtasticd/available.d/NebraHat_1W.yaml && \
+    wget -O /etc/meshtasticd/available.d/NebraHat_2W.yaml https://github.com/wehooper4/Meshtastic-Hardware/raw/refs/heads/main/NebraHat/NebraHat_2W.yaml && \
+    sed -i 's/#  CS/  CS/' /etc/meshtasticd/available.d/NebraHat_2W.yaml && \
+    ls -al /etc/meshtasticd/available.d
 
 
 # Make orig files/dirs available for run stage
-RUN mv /etc/meshtasticd /etc/meshtasticd-dist
-RUN ls -al /etc/me*d*
+RUN mv /etc/meshtasticd /etc/meshtasticd-dist && \
+     ls -al /etc/me*d*
 
 
 # copy key scripts, OK if they are RO
 COPY usr/local/bin/* /usr/local/bin/
 
 RUN chmod a+x /usr/local/bin/*.sh /usr/local/bin/m_* && \
-    date
-RUN ls -l /usr/local/bin/*.sh && date
+    date && \
+    ls -l /usr/local/bin/*.sh && date
 
 # Expose ports for web I/F
 EXPOSE 4403

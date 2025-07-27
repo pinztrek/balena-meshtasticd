@@ -11,11 +11,11 @@ mac_ether () {
  	grep MAC $cfgdir/config.yaml
 }
 
-if [ "$LORA_DEBUG" ] && [ ! "$LORA_DELAY" ]; then
+if [[ "$LORA_DEBUG" ] && [ ! "$LORA_DELAY" ]]; then
 	LORA_DELAY=180
 fi
 
-if [ ! "$LORA_DELAY" ]; then
+if [[ ! "$LORA_DELAY" ]]; then
 	LORA_DELAY=5
 fi
 
@@ -23,8 +23,8 @@ fi
 cd /etc/meshtasticd || exit
 pwd
 
-if [ "$LORA_RESET" ]; then
-	if [ ! -d "$cfgdir"/config.last ];then
+if [[ "$LORA_RESET" ]]; then
+	if [[ ! -d "$cfgdir"/config.last ]];then
  		mkdir -p "$cfgdir"/config.last
         fi
 	echo "Save Old Config in config.last"
@@ -36,43 +36,43 @@ if [ "$LORA_RESET" ]; then
 fi
 
 # Setup dirs as needed
-if [ ! -d config.d ]; then
+if [[ ! -d config.d ]]; then
     mkdir config.d
 fi
 
 # always refresh available.d
-#if [ ! -d available.d ]; then
+#if [[ ! -d available.d ]]; then
     cp -r /etc/meshtasticd-dist/available.d .
 #fi
 
-if [ ! -f config-dist.yaml ]; then
+if [[ ! -f config-dist.yaml ]]; then
     cp -r /etc/meshtasticd-dist/config-dist.yaml .
 fi
 
-if [ ! -f config.yaml ] && [ -f config-dist.yaml ]; then
+if [[ ! -f config.yaml ] && [ -f config-dist.yaml ]]; then
 	echo "Setup default config.yaml"
 	cp config-dist.yaml config.yaml
 fi
 
-if [ "$MESHTOAD" ]; then
+if [[ "$MESHTOAD" ]]; then
  	rm -f config.d/*
  	cp available.d/lora-usb-meshtoad-e22.yaml config.d
   	cfg_device="meshtoad"
 fi
 
-if [ "$NEBRAHAT_1W" ]; then
+if [[ "$NEBRAHAT_1W" ]]; then
  	rm -f config.d/*
  	cp available.d/NebraHat_1W.yaml config.d
   	cfg_device="NebraHat_1W"
 fi
 
-if [ "$NEBRAHAT_2W" ]; then
+if [[ "$NEBRAHAT_2W" ]]; then
  	rm -f config.d/*
  	cp available.d/NebraHat_2W.yaml config.d
   	cfg_device="NebraHat_2W"
 fi
 
-if [ "$WAVESHARE" ] && [ ! "$cfg_device" ]; then
+if [[ "$WAVESHARE" ] && [ ! "$cfg_device" ]]; then
    	rm -f config.d/*
  	cp available.d/lora-waveshare-sxxx.yaml config.d
   	cfg_device="waveshare"
@@ -80,9 +80,9 @@ if [ "$WAVESHARE" ] && [ ! "$cfg_device" ]; then
    	mac_ether
 fi
 
-if [ ! "$cfg_device" ] && [ "$LORA_DEVICE" ]; then
+if [[ ! "$cfg_device" ] && [ "$LORA_DEVICE" ]]; then
   	echo "See if $LORA_DEVICE exists"
-    	if [ -f available.d/"$LORA_DEVICE" ]; then
+    	if [[ -f available.d/"$LORA_DEVICE" ]]; then
      		echo "Select $LORA_DEVICE"
        		rm -f config.d/*
  		cp available.d/"$LORA_DEVICE" config.d
@@ -91,7 +91,7 @@ if [ ! "$cfg_device" ] && [ "$LORA_DEVICE" ]; then
 fi
 
 
-if [ "$NEBRA" ]; then
+if [[ "$NEBRA" ]]; then
     echo "We have a Nebra"
     GPS=/dev/ttyS0
     echo "GPS is $GPS"
@@ -100,12 +100,12 @@ if [ "$NEBRA" ]; then
 fi
 
 # Leave this in for now
-if [ "$GPS" == "nebra" ]; then
+if [[ "$GPS" == "nebra" ]]; then
     GPS=/dev/ttyS0
     echo "Nebra GPS enabled $GPS"
 fi
 
-if [ "$GPS" ]; then
+if [[ "$GPS" ]]; then
     echo "Enable GPS $GPS"
 	sed -i "s,#  SerialPath:.*$,  SerialPath: $GPS," $cfgdir/config.yaml
 	sed -i "s,  SerialPath:.*$,  SerialPath: $GPS," $cfgdir/config.yaml
@@ -120,7 +120,7 @@ lsmod 2>/dev/null | grep -i spi
 ls -l "/dev/spi*" 2>/dev/null
 set +x
 
-if [ ! -d  '/root/.portduino/default/prefs' ]; then
+if [[ ! -d  '/root/.portduino/default/prefs' ]]; then
     # precreate the default dir so portduino does not squawk
     # it's target is in /etc/me*d
     # this needs to move to /var/lib
@@ -132,39 +132,39 @@ if [ ! -d  '/root/.portduino/default/prefs' ]; then
 fi
 
 
-if [ "$LORA_SANE_US" ];then
+if [[ "$LORA_SANE_US" ]];then
 	LORA_REG="US"
  	LORA_PRESET="LONG_FAST"
   	LORA_CHAN_URL="https://meshtastic.org/e/#CgMSAQESCAgBOAFAA0gB"
 fi
 
 #set -x
-if [ "$LORA_REG" ]; then
+if [[ "$LORA_REG" ]]; then
   	#meshtastic --set lora.region "$LORA_REG"
   	mdstr="$mdstr --set lora.region $LORA_REG"
 fi
 
-if [ "$LORA_PRESET" ]; then
+if [[ "$LORA_PRESET" ]]; then
   	#meshtastic --set lora.modem_preset "$LORA_PRESET"
   	 mdstr="$mdstr --set lora.modem_preset $LORA_PRESET"
 fi
 
 # Queue some meshtastic commands to run in background
-if [ "$mdstr" ]; then
+if [[ "$mdstr" ]]; then
     #echo "sleep 5; meshtastic $mdstr&"
     echo "sleep 5;meshtastic $mdstr" >> /tmp/setradio.sh
 fi
 
 # url is more problematic, do it separately
-if [ "$LORA_CHAN_URL" ]; then
+if [[ "$LORA_CHAN_URL" ]]; then
   	#meshtastic --set lora.modem_preset "$LORA_CHAN_URL"
   	 mdstr=" --ch-set-url $LORA_CHAN_URL"
     #echo "meshtastic $mdstr" >> /tmp/setradio.sh
     echo "sleep 5;meshtastic $mdstr" >> /tmp/setradio.sh
 fi
 
-if [ FALSE ]; then
-#if [ -f /tmp/setradio.sh ]; then
+if [[ FALSE ]]; then
+#if [[ -f /tmp/setradio.sh ]]; then
     echo run the radio setup script
     cat /tmp/setradio.sh
     echo "Queue /tmp/setradio.sh"
@@ -172,11 +172,11 @@ if [ FALSE ]; then
     #bash /tmp/setradio.sh &
 fi
 
-if [ "$LORA_MAC_ETHER" ]; then
+if [[ "$LORA_MAC_ETHER" ]]; then
   	mac_ether
 fi
 
-if [ -f /etc/meshtasticd/radio.chg ]; then
+if [[ -f /etc/meshtasticd/radio.chg ]]; then
     echo "Save cfg after startup"
     m_export_sleep&
 fi
