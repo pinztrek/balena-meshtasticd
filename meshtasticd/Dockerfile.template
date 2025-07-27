@@ -27,7 +27,7 @@ SHELL ["/bin/bash", "-c"]
 # Setup some bash aliases
 RUN echo "alias ll='ls -l'" >> /etc/bash*rc && \
     echo "set -o vi" >> /etc/bash*rc && \
-    echo "cd /etc/meshtasticd >> /etc/bash*rc
+    echo "cd /etc/meshtasticd" >> /etc/bash*rc
     
 
 # Install the gpsd for testing
