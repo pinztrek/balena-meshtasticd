@@ -39,8 +39,10 @@ RUN df && ls -al  /root && ls -l /etc/meshtasticd
 RUN df && ln -s /etc/meshtasticd/portduino /root/.portduino && ls -al  /root && ls -al /etc/me*d
 
 # put the nodes in /tmp to reduce disk writes
-RUN mkdir -p /etc/meshtasticd/portduino/default/prefs && chown meshtastic:meshtastic /etc/meshtasticd/portduino/default/prefs && \
-    touch /tmp/nodes.proto && chown meshtastic:meshtastic /tmp/nodes.proto && \
+RUN mkdir -p /etc/meshtasticd/portduino/default/prefs && \
+    #chown meshtastic:meshtastic /etc/meshtasticd/portduino/default/prefs && \
+    touch /tmp/nodes.proto && \
+    #chown meshtastic:meshtastic /tmp/nodes.proto && \
     ln -s /tmp/nodes.proto /etc/meshtasticd/portduino/default/prefs/nodes.proto
 
 # copy any preloaded cfg info (may not be needed now)
