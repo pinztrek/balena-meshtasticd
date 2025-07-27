@@ -132,14 +132,14 @@ if [[ ! -d  '/root/.portduino/default/prefs' ]]; then
 fi
 
 # put the nodes in /tmp to reduce disk writes
-chown meshtasticd:meshtasticd /tmp/nodes.proto 
-# get rid of old file so the symlink will work
-if [[ -f /etc/meshtasticd/portduino/default/prefs/nodes.proto ]]; then
-    rm -f /etc/meshtasticd/portduino/default/prefs/nodes.proto
+# save the old file so the symlink will work
+if [[ -s /etc/meshtasticd/portduino/default/prefs/nodes.proto ]]; then
+    mv  /etc/meshtasticd/portduino/default/prefs/nodes.proto /etc/meshtasticd/portduino/default/prefs/nodes.last
+    cp /etc/meshtasticd/portduino/default/prefs/nodes.last /tmp/nodes.proto 
+    chown meshtasticd:meshtasticd /tmp/nodes.proto 
+    ln -s /tmp/nodes.proto /etc/meshtasticd/portduino/default/prefs/nodes.proto
 fi
 
-touch /tmp/nodes.proto 
-ln -s /tmp/nodes.proto /etc/meshtasticd/portduino/default/prefs/nodes.proto
 
 
 
