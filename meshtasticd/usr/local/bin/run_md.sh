@@ -11,7 +11,7 @@ mac_ether () {
  	grep MAC $cfgdir/config.yaml
 }
 
-if [[ "$LORA_DEBUG" ] && [ ! "$LORA_DELAY" ]]; then
+if [[ "$LORA_DEBUG" ]] && [[ ! "$LORA_DELAY" ]]; then
 	LORA_DELAY=180
 fi
 
@@ -49,7 +49,7 @@ if [[ ! -f config-dist.yaml ]]; then
     cp -r /etc/meshtasticd-dist/config-dist.yaml .
 fi
 
-if [[ ! -f config.yaml ] && [ -f config-dist.yaml ]]; then
+if [[ ! -f config.yaml ]] && [[ -f config-dist.yaml ]]; then
 	echo "Setup default config.yaml"
 	cp config-dist.yaml config.yaml
 fi
@@ -72,7 +72,7 @@ if [[ "$NEBRAHAT_2W" ]]; then
   	cfg_device="NebraHat_2W"
 fi
 
-if [[ "$WAVESHARE" ] && [ ! "$cfg_device" ]]; then
+if [[ "$WAVESHARE" ]] && [[ ! "$cfg_device" ]]; then
    	rm -f config.d/*
  	cp available.d/lora-waveshare-sxxx.yaml config.d
   	cfg_device="waveshare"
@@ -80,7 +80,7 @@ if [[ "$WAVESHARE" ] && [ ! "$cfg_device" ]]; then
    	mac_ether
 fi
 
-if [[ ! "$cfg_device" ] && [ "$LORA_DEVICE" ]]; then
+if [[ ! "$cfg_device" ]] && [[ "$LORA_DEVICE" ]]; then
   	echo "See if $LORA_DEVICE exists"
     	if [[ -f available.d/"$LORA_DEVICE" ]]; then
      		echo "Select $LORA_DEVICE"
